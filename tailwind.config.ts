@@ -51,9 +51,10 @@ export default {
           foreground: "hsl(var(--card-foreground))",
         },
         kinvo: {
+          green: "hsl(var(--kinvo-green))",
+          teal: "hsl(var(--kinvo-teal))",
           cyan: "hsl(var(--kinvo-cyan))",
-          violet: "hsl(var(--kinvo-violet))",
-          pink: "hsl(var(--kinvo-pink))",
+          blue: "hsl(var(--kinvo-blue))",
           navy: "hsl(var(--kinvo-navy))",
           gray: "hsl(var(--kinvo-gray-light))",
         },

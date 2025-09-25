@@ -8,56 +8,57 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Kinvo Brand Colors - Inspirado no design das telas */
-    --background: 250 50% 98%;
-    --foreground: 240 10% 15%;
+    /* Nova paleta de cores - Verde/Azul/Turquesa */
+    --background: 210 20% 98%;
+    --foreground: 215 25% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 240 10% 15%;
+    --card-foreground: 215 25% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 15%;
+    --popover-foreground: 215 25% 15%;
 
-    /* Cores principais do Kinvo - Turquesa/Cyan */
-    --primary: 187 100% 42%;
+    /* Verde primário */
+    --primary: 151 100% 50%;
     --primary-foreground: 0 0% 100%;
 
-    /* Roxo/Violeta secundário */
-    --secondary: 261 83% 58%;
+    /* Turquesa secundário */
+    --secondary: 174 100% 45%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 240 5% 96%;
-    --muted-foreground: 240 4% 46%;
+    --muted: 210 15% 96%;
+    --muted-foreground: 215 15% 46%;
 
-    /* Accent em rosa/magenta */
-    --accent: 322 81% 60%;
+    /* Azul accent */
+    --accent: 213 100% 65%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 240 6% 90%;
-    --input: 240 6% 90%;
-    --ring: 187 100% 42%;
+    --border: 210 20% 90%;
+    --input: 210 20% 90%;
+    --ring: 151 100% 50%;
 
     --radius: 1rem;
 
-    /* Cores customizadas do Kinvo */
-    --kinvo-cyan: 187 100% 42%;
-    --kinvo-violet: 261 83% 58%;
-    --kinvo-pink: 322 81% 60%;
-    --kinvo-navy: 235 21% 21%;
-    --kinvo-gray-light: 240 5% 96%;
+    /* Cores customizadas da nova paleta */
+    --kinvo-green: 151 100% 50%;        /* #00F983 */
+    --kinvo-teal: 174 100% 45%;         /* #00E5B6 */
+    --kinvo-cyan: 184 100% 42%;         /* #00D5D7 */
+    --kinvo-blue: 213 100% 65%;         /* #4D78FF */
+    --kinvo-navy: 215 25% 25%;
+    --kinvo-gray-light: 210 15% 96%;
 
-    /* Gradientes */
-    --gradient-kinvo: linear-gradient(135deg, hsl(187 100% 42%) 0%, hsl(261 83% 58%) 50%, hsl(322 81% 60%) 100%);
-    --gradient-sunset: linear-gradient(180deg, hsl(322 81% 60%) 0%, hsl(261 83% 58%) 50%, hsl(235 21% 21%) 100%);
-    --gradient-card: linear-gradient(145deg, hsl(187 100% 42% / 0.1) 0%, hsl(261 83% 58% / 0.05) 100%);
+    /* Gradientes atualizados */
+    --gradient-kinvo: linear-gradient(135deg, hsl(151 100% 50%) 0%, hsl(174 100% 45%) 30%, hsl(184 100% 42%) 70%, hsl(213 100% 65%) 100%);
+    --gradient-sunset: linear-gradient(180deg, hsl(151 100% 50%) 0%, hsl(174 100% 45%) 50%, hsl(215 25% 25%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(151 100% 50% / 0.1) 0%, hsl(174 100% 45% / 0.05) 100%);
 
-    /* Sombras */
-    --shadow-kinvo: 0 10px 25px hsl(187 100% 42% / 0.15);
-    --shadow-float: 0 20px 40px hsl(261 83% 58% / 0.2);
-    --shadow-card: 0 4px 20px hsl(240 10% 15% / 0.08);
+    /* Sombras atualizadas */
+    --shadow-kinvo: 0 10px 25px hsl(151 100% 50% / 0.15);
+    --shadow-float: 0 20px 40px hsl(174 100% 45% / 0.2);
+    --shadow-card: 0 4px 20px hsl(215 25% 15% / 0.08);
 
     --sidebar-background: 0 0% 98%;
 
@@ -77,38 +78,38 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 235 21% 11%;
+    --background: 215 25% 11%;
     --foreground: 0 0% 98%;
 
-    --card: 235 21% 16%;
+    --card: 215 25% 16%;
     --card-foreground: 0 0% 98%;
 
-    --popover: 235 21% 16%;
+    --popover: 215 25% 16%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 187 100% 42%;
+    --primary: 151 100% 50%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 261 83% 58%;
+    --secondary: 174 100% 45%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 235 21% 21%;
-    --muted-foreground: 240 5% 65%;
+    --muted: 215 25% 21%;
+    --muted-foreground: 210 15% 65%;
 
-    --accent: 322 81% 60%;
+    --accent: 213 100% 65%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 235 21% 21%;
-    --input: 235 21% 21%;
-    --ring: 187 100% 42%;
+    --border: 215 25% 21%;
+    --input: 215 25% 21%;
+    --ring: 151 100% 50%;
 
     /* Dark mode gradientes */
-    --gradient-kinvo: linear-gradient(135deg, hsl(187 100% 42%) 0%, hsl(261 83% 58%) 50%, hsl(322 81% 60%) 100%);
-    --gradient-sunset: linear-gradient(180deg, hsl(322 81% 60%) 0%, hsl(261 83% 58%) 50%, hsl(235 21% 11%) 100%);
-    --gradient-card: linear-gradient(145deg, hsl(187 100% 42% / 0.15) 0%, hsl(261 83% 58% / 0.1) 100%);
+    --gradient-kinvo: linear-gradient(135deg, hsl(151 100% 50%) 0%, hsl(174 100% 45%) 30%, hsl(184 100% 42%) 70%, hsl(213 100% 65%) 100%);
+    --gradient-sunset: linear-gradient(180deg, hsl(151 100% 50%) 0%, hsl(174 100% 45%) 50%, hsl(215 25% 11%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(151 100% 50% / 0.15) 0%, hsl(174 100% 45% / 0.1) 100%);
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;

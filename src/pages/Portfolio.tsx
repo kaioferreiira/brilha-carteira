@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { LogOut, DollarSign, TrendingUp, PieChart as PieChartIcon, Plus, Wallet } from 'lucide-react';
+import { LogOut, DollarSign, TrendingUp, PieChart as PieChartIcon, Plus, Wallet, Settings } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -8,13 +8,16 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 
 import { useAuth } from '@/contexts/AuthContext';
 import { usePortfolio } from '@/contexts/PortfolioContext';
 import { StockCard } from '@/components/StockCard';
 import { AddStockDialog } from '@/components/AddStockDialog';
+import { AddContributionDialog } from '@/components/AddContributionDialog';
 import { PieChart } from '@/components/PieChart';
 import { Stock } from '@/types';
+import { toast } from '@/hooks/use-toast';
 
 const Portfolio: React.FC = () => {
   const { user, logout } = useAuth();
@@ -29,8 +32,8 @@ const Portfolio: React.FC = () => {
 
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingStock, setEditingStock] = useState<Stock | null>(null);
-  const [newCashAmount, setNewCashAmount] = useState('');
   const [showProjection, setShowProjection] = useState(false);
+  const [manageCashOpen, setManageCashOpen] = useState(false);
 
   const formatCurrency = (value: number) => {
     return new Intl.NumberFormat('pt-BR', {
@@ -49,12 +52,13 @@ const Portfolio: React.FC = () => {
     setIsDialogOpen(true);
   };
 
-  const handleCashUpdate = () => {
-    const amount = parseFloat(newCashAmount);
-    if (amount >= 0) {
-      updateCash(amount);
-      setNewCashAmount('');
-    }
+  const handleManageCash = () => {
+    setManageCashOpen(false);
+    
+    toast({
+      title: "Caixa consultado!",
+      description: `Valor atual em caixa: ${formatCurrency(portfolio?.cashAmount || 0)}`,
+    });
   };
 
   const projection = calculateProjection();
@@ -65,11 +69,11 @@ const Portfolio: React.FC = () => {
     value: stock.allocatedValue,
     percentage: stock.percentage,
     color: [
+      'hsl(var(--kinvo-green))',
+      'hsl(var(--kinvo-teal))',
       'hsl(var(--kinvo-cyan))',
-      'hsl(var(--secondary))',
-      'hsl(var(--accent))',
-      'hsl(var(--kinvo-violet))',
-      'hsl(var(--kinvo-pink))'
+      'hsl(var(--kinvo-blue))',
+      'hsl(var(--secondary))'
     ][index % 5]
   })) || [];
 
@@ -168,35 +172,42 @@ const Portfolio: React.FC = () => {
         >
           <Card className="bg-gradient-card border-0 shadow-card">
             <CardHeader>
-              <CardTitle className="text-lg font-semibold flex items-center">
-                <TrendingUp size={20} className="mr-2 text-primary" />
-                Gerenciar Caixa
+              <CardTitle className="text-lg font-semibold flex items-center justify-between">
+                <div className="flex items-center">
+                  <TrendingUp size={20} className="mr-2 text-primary" />
+                  Ações
+                </div>
+                <Dialog open={manageCashOpen} onOpenChange={setManageCashOpen}>
+                  <DialogTrigger asChild>
+                    <Button variant="outline" size="sm">
+                      <Settings className="mr-2 h-4 w-4" />
+                      Gerenciar Caixa
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="sm:max-w-md">
+                    <DialogHeader>
+                      <DialogTitle>Gerenciar Caixa</DialogTitle>
+                    </DialogHeader>
+                    <div className="space-y-4">
+                      <div className="space-y-2">
+                        <Label>Valor Atual em Caixa</Label>
+                        <div className="text-2xl font-bold text-primary">
+                          {formatCurrency(portfolio?.cashAmount || 0)}
+                        </div>
+                      </div>
+                      <div className="flex gap-2">
+                        <Button type="button" variant="outline" onClick={() => setManageCashOpen(false)} className="flex-1">
+                          Fechar
+                        </Button>
+                      </div>
+                    </div>
+                  </DialogContent>
+                </Dialog>
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="flex space-x-3">
-                <div className="flex-1">
-                  <Label htmlFor="cashAmount" className="text-sm font-medium">
-                    Novo valor em caixa (R$)
-                  </Label>
-                  <Input
-                    id="cashAmount"
-                    type="number"
-                    step="0.01"
-                    value={newCashAmount}
-                    onChange={(e) => setNewCashAmount(e.target.value)}
-                    placeholder="10000.00"
-                    className="h-12 rounded-xl border-0 bg-muted"
-                  />
-                </div>
-                <Button
-                  onClick={handleCashUpdate}
-                  disabled={!newCashAmount}
-                  className="self-end h-12 px-6 rounded-xl bg-primary hover:bg-primary/90"
-                >
-                  Atualizar
-                </Button>
-              </div>
+              {/* Botão de Aporte */}
+              <AddContributionDialog />
 
               {portfolio.stocks.length > 0 && (
                 <div className="flex items-center space-x-4 pt-2">

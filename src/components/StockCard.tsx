@@ -30,9 +30,10 @@ export const StockCard: React.FC<StockCardProps> = ({
   };
 
   const getColorByPercentage = (percentage: number) => {
-    if (percentage >= 30) return 'hsl(var(--kinvo-cyan))';
-    if (percentage >= 20) return 'hsl(var(--secondary))';
-    if (percentage >= 10) return 'hsl(var(--accent))';
+    if (percentage >= 30) return 'hsl(var(--kinvo-green))';
+    if (percentage >= 20) return 'hsl(var(--kinvo-teal))';
+    if (percentage >= 10) return 'hsl(var(--kinvo-cyan))';
+    if (percentage >= 5) return 'hsl(var(--kinvo-blue))';
     return 'hsl(var(--muted-foreground))';
   };
 

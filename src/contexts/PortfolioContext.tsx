@@ -84,6 +84,11 @@ export const PortfolioProvider: React.FC<PortfolioProviderProps> = ({ children }
     setPortfolio(prev => {
       if (!prev) return prev;
       
+      const oldStock = prev.stocks.find(stock => stock.id === id);
+      const oldAllocatedValue = oldStock?.allocatedValue || 0;
+      const newAllocatedValue = updates.allocatedValue || oldAllocatedValue;
+      const difference = newAllocatedValue - oldAllocatedValue;
+      
       const updatedStocks = prev.stocks.map(stock =>
         stock.id === id ? { ...stock, ...updates } : stock
       );
@@ -91,10 +96,14 @@ export const PortfolioProvider: React.FC<PortfolioProviderProps> = ({ children }
       const totalAllocated = updatedStocks.reduce((sum, s) => sum + s.allocatedValue, 0);
       const stocksWithPercentages = calculatePercentages(updatedStocks, totalAllocated);
       
+      // Abater a diferença do caixa disponível
+      const newCashAmount = Math.max(0, prev.cashAmount - difference);
+      
       return {
         ...prev,
         stocks: stocksWithPercentages,
         totalValue: totalAllocated,
+        cashAmount: newCashAmount,
         updatedAt: new Date()
       };
     });
