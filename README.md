@@ -1,73 +1,180 @@
-# Welcome to your Lovable project
+# Kinvo - Carteira de Investimentos 💼
 
-## Project info
+Uma aplicação moderna e intuitiva para gerenciamento de carteiras de ações, desenvolvida especialmente para jovens universitários que querem controlar seus investimentos de forma prática e visual.
 
-**URL**: https://lovable.dev/projects/f9cf8d67-ed8f-4f5f-8739-b27660894345
+## ✨ Características
 
-## How can I edit this code?
+- **Design Moderno**: Interface clean inspirada no design das principais fintechs
+- **Gradientes Vibrantes**: Sistema de cores baseado em azul/turquesa, roxo e rosa
+- **Animações Fluidas**: Transições suaves com Framer Motion
+- **Responsivo**: Otimizado para dispositivos móveis
+- **Gerenciamento Completo**: Controle total da sua carteira de ações
 
-There are several ways of editing your application.
+## 🚀 Funcionalidades
 
-**Use Lovable**
+### 📱 Telas Principais
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/f9cf8d67-ed8f-4f5f-8739-b27660894345) and start prompting.
+1. **Tela de Apresentação**
+   - Background inspirador com gradiente sunset
+   - Elementos geométricos flutuantes
+   - Call-to-action para login/cadastro
 
-Changes made via Lovable will be committed automatically to this repo.
+2. **Tela de Login**
+   - Design minimalista e clean
+   - Validação de formulário com Zod
+   - Estados de loading e erro
+   - Animações de entrada
 
-**Use your preferred IDE**
+3. **Tela de Portfólio**
+   - Dashboard completo da carteira
+   - Gráfico de pizza personalizado
+   - Gerenciamento de caixa
+   - Projeção de aportes
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### 💰 Gestão de Carteira
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+- **Adicionar Ações**: Cadastro de ações com símbolo, nome, valor e peso
+- **Controle de Pesos**: Sistema de pesos para distribuição proporcional
+- **Cálculo Automático**: Percentuais calculados automaticamente
+- **Projeção de Aportes**: Visualização de como distribuir novos investimentos
+- **Gráfico Visual**: Representação visual da distribuição da carteira
 
-Follow these steps:
+## 🛠 Tecnologias
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+- **React 18** - Framework principal
+- **TypeScript** - Tipagem estática
+- **Vite** - Build tool moderna
+- **Tailwind CSS** - Styling utilitário
+- **Framer Motion** - Animações
+- **Shadcn/ui** - Componentes UI
+- **React Hook Form** - Gerenciamento de formulários
+- **Zod** - Validação de schemas
+- **React Router DOM** - Navegação
+- **Lucide React** - Ícones
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+## 🎨 Sistema de Design
 
-# Step 3: Install the necessary dependencies.
-npm i
+### Cores Principais
+- **Primary**: Turquesa/Cyan (`--kinvo-cyan`)
+- **Secondary**: Roxo/Violeta (`--kinvo-violet`) 
+- **Accent**: Rosa/Magenta (`--kinvo-pink`)
+- **Navy**: Azul Marinho (`--kinvo-navy`)
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+### Gradientes
+- **Kinvo**: Gradiente principal (cyan → violet → pink)
+- **Sunset**: Gradiente de fundo (pink → violet → navy)
+- **Card**: Gradiente sutil para cards
+
+### Animações
+- **Fade In**: Entrada suave de elementos
+- **Float**: Movimento flutuante para elementos geométricos
+- **Pulse Glow**: Efeito de brilho pulsante
+- **Bounce In**: Entrada com efeito de bounce
+
+## 📁 Estrutura do Projeto
+
+```
+src/
+├── assets/           # Imagens e recursos
+├── components/       # Componentes reutilizáveis
+│   ├── ui/          # Componentes base (Shadcn)
+│   ├── KinvoLogo.tsx
+│   ├── ProtectedRoute.tsx
+│   ├── PieChart.tsx
+│   ├── StockCard.tsx
+│   └── AddStockDialog.tsx
+├── contexts/         # Contextos React
+│   ├── AuthContext.tsx
+│   └── PortfolioContext.tsx
+├── data/            # Dados mock
+├── hooks/           # Hooks customizados
+├── pages/           # Páginas da aplicação
+│   ├── Welcome.tsx
+│   ├── Login.tsx
+│   ├── Portfolio.tsx
+│   └── NotFound.tsx
+├── types/           # Definições TypeScript
+└── lib/             # Utilitários
+```
+
+## 🔐 Autenticação
+
+Sistema de autenticação simulado com:
+- Context API para gerenciamento de estado
+- Validação de formulários
+- Estados de loading
+- Rotas protegidas
+- Persistência de sessão
+
+## 📊 Gerenciamento de Estado
+
+- **AuthContext**: Controle de usuário logado
+- **PortfolioContext**: Gestão da carteira de investimentos
+- **React Query**: Cache e sincronização de dados
+- **Local State**: Estados locais dos componentes
+
+## 🎯 Funcionalidades Avançadas
+
+### Sistema de Pesos
+Cada ação pode ter um peso diferente, permitindo distribuição proporcional personalizada do caixa disponível.
+
+### Projeção de Aportes
+Cálculo automático de quanto investir em cada ação baseado nos pesos configurados e valor em caixa.
+
+### Gráfico Interativo
+Visualização em tempo real da distribuição da carteira com animações suaves.
+
+## 🚀 Como Executar
+
+1. **Instale as dependências**:
+```bash
+npm install
+```
+
+2. **Execute em modo desenvolvimento**:
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+3. **Acesse**: `http://localhost:8080`
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## 📱 Como Usar
 
-**Use GitHub Codespaces**
+1. **Tela Inicial**: Clique em "Fazer login" ou "Criar conta"
+2. **Login**: Use qualquer email/senha válidos (simulado)
+3. **Dashboard**: Visualize sua carteira vazia
+4. **Adicionar Ações**: 
+   - Clique em "Adicionar Ação"
+   - Preencha: símbolo (ex: PETR4), nome, valor alocado, peso
+   - Confirme
+5. **Gerenciar Caixa**:
+   - Atualize o valor em caixa
+   - Visualize a projeção de aportes
+6. **Acompanhar**: Veja o gráfico e percentuais atualizarem automaticamente
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## 🎨 Personalização
 
-## What technologies are used for this project?
+O sistema de design está totalmente configurado no `tailwind.config.ts` e `index.css`. Para personalizar:
 
-This project is built with:
+1. **Cores**: Modifique as variáveis CSS em `index.css`
+2. **Componentes**: Customize os componentes Shadcn em `src/components/ui/`
+3. **Animações**: Adicione novas animações em `tailwind.config.ts`
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## 🔮 Próximos Passos
 
-## How can I deploy this project?
+- [ ] Integração com API real de cotações
+- [ ] Histórico de transações
+- [ ] Notificações push
+- [ ] Gráficos de performance
+- [ ] Exportação de relatórios
+- [ ] Modo escuro/claro
+- [ ] Integração com bancos
+- [ ] Análise de risco
 
-Simply open [Lovable](https://lovable.dev/projects/f9cf8d67-ed8f-4f5f-8739-b27660894345) and click on Share -> Publish.
+## 📄 Licença
 
-## Can I connect a custom domain to my Lovable project?
+Este projeto foi desenvolvido para fins educacionais e de demonstração.
 
-Yes, you can!
+---
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+**Desenvolvido com ❤️ para investidores que querem simplicidade e beleza na gestão de suas carteiras.**
