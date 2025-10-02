@@ -48,42 +48,30 @@ export const PortfolioProvider: React.FC<PortfolioProviderProps> = ({ children }
     }));
   }, []);
 
-  const addStock = useCallback((newStock: Omit<Stock, 'id' | 'percentage' | 'allocatedValue'> & { weight: number }) => {
+  const addStock = useCallback((newStock: Omit<Stock, 'id' | 'percentage'>) => {
     if (!portfolio) return;
 
     setPortfolio(prev => {
       if (!prev) return prev;
       
-      // Calcular o total de pesos incluindo a nova ação
-      const totalWeight = prev.stocks.reduce((sum, s) => sum + s.weight, 0) + newStock.weight;
-      
-      // Calcular quanto alocar para cada ação baseado no peso
-      const updatedStocks = prev.stocks.map(stock => {
-        const stockPercentage = stock.weight / totalWeight;
-        const newAllocatedValue = prev.totalValue * stockPercentage;
-        return { ...stock, allocatedValue: newAllocatedValue };
-      });
-      
-      // Calcular valor alocado para a nova ação
-      const newStockPercentage = newStock.weight / totalWeight;
-      const newStockAllocatedValue = prev.totalValue * newStockPercentage;
-      
       const stock: Stock = {
         ...newStock,
         id: Date.now().toString(),
         percentage: 0,
-        allocatedValue: newStockAllocatedValue
       };
       
-      updatedStocks.push(stock);
-      
+      const updatedStocks = [...prev.stocks, stock];
       const totalAllocated = updatedStocks.reduce((sum, s) => sum + s.allocatedValue, 0);
       const stocksWithPercentages = calculatePercentages(updatedStocks, totalAllocated);
+      
+      // Deduzir o valor alocado do caixa disponível
+      const newCashAmount = prev.cashAmount - newStock.allocatedValue;
       
       return {
         ...prev,
         stocks: stocksWithPercentages,
         totalValue: totalAllocated,
+        cashAmount: newCashAmount,
         updatedAt: new Date()
       };
     });
@@ -100,21 +88,17 @@ export const PortfolioProvider: React.FC<PortfolioProviderProps> = ({ children }
     setPortfolio(prev => {
       if (!prev) return prev;
       
-      // Se o peso foi atualizado, recalcular todos os valores alocados
-      if (updates.weight !== undefined) {
-        const totalWeight = prev.stocks.reduce((sum, s) => sum + (s.id === id ? updates.weight! : s.weight), 0);
+      const oldStock = prev.stocks.find(s => s.id === id);
+      if (!oldStock) return prev;
+      
+      // Se o valor alocado foi atualizado, ajustar o caixa
+      if (updates.allocatedValue !== undefined && updates.allocatedValue !== oldStock.allocatedValue) {
+        const difference = updates.allocatedValue - oldStock.allocatedValue;
+        const newCashAmount = prev.cashAmount - difference;
         
-        const updatedStocks = prev.stocks.map(stock => {
-          if (stock.id === id) {
-            const stockPercentage = updates.weight! / totalWeight;
-            const newAllocatedValue = prev.totalValue * stockPercentage;
-            return { ...stock, ...updates, allocatedValue: newAllocatedValue };
-          } else {
-            const stockPercentage = stock.weight / totalWeight;
-            const newAllocatedValue = prev.totalValue * stockPercentage;
-            return { ...stock, allocatedValue: newAllocatedValue };
-          }
-        });
+        const updatedStocks = prev.stocks.map(stock =>
+          stock.id === id ? { ...stock, ...updates } : stock
+        );
         
         const totalAllocated = updatedStocks.reduce((sum, s) => sum + s.allocatedValue, 0);
         const stocksWithPercentages = calculatePercentages(updatedStocks, totalAllocated);
@@ -123,11 +107,12 @@ export const PortfolioProvider: React.FC<PortfolioProviderProps> = ({ children }
           ...prev,
           stocks: stocksWithPercentages,
           totalValue: totalAllocated,
+          cashAmount: newCashAmount,
           updatedAt: new Date()
         };
       }
       
-      // Atualização simples sem mudança de peso
+      // Atualização simples sem mudança de valor alocado
       const updatedStocks = prev.stocks.map(stock =>
         stock.id === id ? { ...stock, ...updates } : stock
       );
@@ -150,24 +135,22 @@ export const PortfolioProvider: React.FC<PortfolioProviderProps> = ({ children }
     setPortfolio(prev => {
       if (!prev) return prev;
       
+      // Encontrar a ação que está sendo removida para devolver o valor ao caixa
+      const removedStock = prev.stocks.find(stock => stock.id === id);
       const updatedStocks = prev.stocks.filter(stock => stock.id !== id);
       
-      // Recalcular valores alocados baseado nos pesos restantes
+      // Devolver o valor alocado ao caixa
+      const newCashAmount = removedStock ? prev.cashAmount + removedStock.allocatedValue : prev.cashAmount;
+      
       if (updatedStocks.length > 0) {
-        const totalWeight = updatedStocks.reduce((sum, s) => sum + s.weight, 0);
-        const recalculatedStocks = updatedStocks.map(stock => {
-          const stockPercentage = stock.weight / totalWeight;
-          const newAllocatedValue = prev.totalValue * stockPercentage;
-          return { ...stock, allocatedValue: newAllocatedValue };
-        });
-        
-        const totalAllocated = recalculatedStocks.reduce((sum, s) => sum + s.allocatedValue, 0);
-        const stocksWithPercentages = calculatePercentages(recalculatedStocks, totalAllocated);
+        const totalAllocated = updatedStocks.reduce((sum, s) => sum + s.allocatedValue, 0);
+        const stocksWithPercentages = calculatePercentages(updatedStocks, totalAllocated);
         
         return {
           ...prev,
           stocks: stocksWithPercentages,
           totalValue: totalAllocated,
+          cashAmount: newCashAmount,
           updatedAt: new Date()
         };
       }
@@ -177,6 +160,7 @@ export const PortfolioProvider: React.FC<PortfolioProviderProps> = ({ children }
         ...prev,
         stocks: [],
         totalValue: 0,
+        cashAmount: newCashAmount,
         updatedAt: new Date()
       };
     });

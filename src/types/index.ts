@@ -42,7 +42,7 @@ export interface AuthContextType {
 export interface PortfolioContextType {
   portfolio: Portfolio | null;
   isLoading: boolean;
-  addStock: (stock: Omit<Stock, 'id' | 'percentage' | 'allocatedValue'>) => void;
+  addStock: (stock: Omit<Stock, 'id' | 'percentage'>) => void;
   updateStock: (id: string, updates: Partial<Stock>) => void;
   removeStock: (id: string) => void;
   updateCash: (amount: number) => void;

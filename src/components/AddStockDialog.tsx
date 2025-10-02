@@ -15,12 +15,13 @@ const stockSchema = z.object({
   symbol: z.string().min(1, 'Símbolo é obrigatório').max(10, 'Máximo 10 caracteres'),
   name: z.string().min(1, 'Nome é obrigatório').max(50, 'Máximo 50 caracteres'),
   weight: z.number().min(1, 'Peso deve ser pelo menos 1').max(10, 'Peso máximo é 10'),
+  allocatedValue: z.number().min(0, 'Valor deve ser positivo'),
 });
 
 type StockFormData = z.infer<typeof stockSchema>;
 
 interface AddStockDialogProps {
-  onAddStock: (stock: Omit<Stock, 'id' | 'percentage' | 'allocatedValue'>) => void;
+  onAddStock: (stock: Omit<Stock, 'id' | 'percentage'>) => void;
   editingStock?: Stock | null;
   onUpdateStock?: (id: string, updates: Partial<Stock>) => void;
   isOpen: boolean;
@@ -46,6 +47,7 @@ export const AddStockDialog: React.FC<AddStockDialogProps> = ({
       symbol: '',
       name: '',
       weight: 1,
+      allocatedValue: 0,
     },
   });
 
@@ -54,6 +56,7 @@ export const AddStockDialog: React.FC<AddStockDialogProps> = ({
       setValue('symbol', editingStock.symbol);
       setValue('name', editingStock.name);
       setValue('weight', editingStock.weight);
+      setValue('allocatedValue', editingStock.allocatedValue);
     } else {
       reset();
     }
@@ -64,6 +67,7 @@ export const AddStockDialog: React.FC<AddStockDialogProps> = ({
       symbol: data.symbol,
       name: data.name,
       weight: data.weight,
+      allocatedValue: data.allocatedValue,
     };
 
     if (editingStock && onUpdateStock) {
@@ -148,10 +152,22 @@ export const AddStockDialog: React.FC<AddStockDialogProps> = ({
             )}
           </div>
 
-          <div className="space-y-2 bg-primary/5 p-4 rounded-xl">
-            <p className="text-sm text-muted-foreground">
-              💡 O valor será calculado automaticamente com base no peso e no caixa disponível
-            </p>
+          <div className="space-y-2">
+            <Label htmlFor="allocatedValue" className="text-sm font-medium">
+              Valor Alocado *
+            </Label>
+            <Input
+              id="allocatedValue"
+              type="number"
+              min="0"
+              step="0.01"
+              placeholder="0.00"
+              className="h-12 rounded-xl border-0 bg-muted"
+              {...register('allocatedValue', { valueAsNumber: true })}
+            />
+            {errors.allocatedValue && (
+              <p className="text-destructive text-xs">{errors.allocatedValue.message}</p>
+            )}
           </div>
 
           <div className="flex space-x-3 pt-4">
