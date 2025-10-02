@@ -194,14 +194,36 @@ export const PortfolioProvider: React.FC<PortfolioProviderProps> = ({ children }
       if (!prev) return prev;
       
       const newCashAmount = prev.cashAmount + amount;
+      const newTotalValue = prev.totalValue + amount;
+      
+      // Recalcular valores alocados baseado nos pesos com o novo total
+      if (prev.stocks.length > 0) {
+        const totalWeight = prev.stocks.reduce((sum, s) => sum + s.weight, 0);
+        const recalculatedStocks = prev.stocks.map(stock => {
+          const stockPercentage = stock.weight / totalWeight;
+          const newAllocatedValue = newTotalValue * stockPercentage;
+          return { ...stock, allocatedValue: newAllocatedValue };
+        });
+        
+        const stocksWithPercentages = calculatePercentages(recalculatedStocks, newTotalValue);
+        
+        return {
+          ...prev,
+          cashAmount: newCashAmount,
+          totalValue: newTotalValue,
+          stocks: stocksWithPercentages,
+          updatedAt: new Date()
+        };
+      }
       
       return {
         ...prev,
         cashAmount: newCashAmount,
+        totalValue: newTotalValue,
         updatedAt: new Date()
       };
     });
-  }, [portfolio]);
+  }, [portfolio, calculatePercentages]);
 
   const calculateProjection = useCallback(() => {
     if (!portfolio) return {};
