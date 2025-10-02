@@ -14,14 +14,13 @@ import { Stock } from '@/types';
 const stockSchema = z.object({
   symbol: z.string().min(1, 'Símbolo é obrigatório').max(10, 'Máximo 10 caracteres'),
   name: z.string().min(1, 'Nome é obrigatório').max(50, 'Máximo 50 caracteres'),
-  allocatedValue: z.number().min(0.01, 'Valor deve ser maior que 0'),
   weight: z.number().min(1, 'Peso deve ser pelo menos 1').max(10, 'Peso máximo é 10'),
 });
 
 type StockFormData = z.infer<typeof stockSchema>;
 
 interface AddStockDialogProps {
-  onAddStock: (stock: Omit<Stock, 'id' | 'percentage'>) => void;
+  onAddStock: (stock: Omit<Stock, 'id' | 'percentage' | 'allocatedValue'>) => void;
   editingStock?: Stock | null;
   onUpdateStock?: (id: string, updates: Partial<Stock>) => void;
   isOpen: boolean;
@@ -46,7 +45,6 @@ export const AddStockDialog: React.FC<AddStockDialogProps> = ({
     defaultValues: {
       symbol: '',
       name: '',
-      allocatedValue: 0,
       weight: 1,
     },
   });
@@ -55,7 +53,6 @@ export const AddStockDialog: React.FC<AddStockDialogProps> = ({
     if (editingStock) {
       setValue('symbol', editingStock.symbol);
       setValue('name', editingStock.name);
-      setValue('allocatedValue', editingStock.allocatedValue);
       setValue('weight', editingStock.weight);
     } else {
       reset();
@@ -66,7 +63,6 @@ export const AddStockDialog: React.FC<AddStockDialogProps> = ({
     const stockData = {
       symbol: data.symbol,
       name: data.name,
-      allocatedValue: data.allocatedValue,
       weight: data.weight,
     };
 
@@ -152,22 +148,10 @@ export const AddStockDialog: React.FC<AddStockDialogProps> = ({
             )}
           </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="allocatedValue" className="text-sm font-medium">
-              Valor Alocado (R$) *
-            </Label>
-            <Input
-              id="allocatedValue"
-              type="number"
-              step="0.01"
-              min="0.01"
-              placeholder="1000.00"
-              className="h-12 rounded-xl border-0 bg-muted"
-              {...register('allocatedValue', { valueAsNumber: true })}
-            />
-            {errors.allocatedValue && (
-              <p className="text-destructive text-xs">{errors.allocatedValue.message}</p>
-            )}
+          <div className="space-y-2 bg-primary/5 p-4 rounded-xl">
+            <p className="text-sm text-muted-foreground">
+              💡 O valor será calculado automaticamente com base no peso e no caixa disponível
+            </p>
           </div>
 
           <div className="flex space-x-3 pt-4">
