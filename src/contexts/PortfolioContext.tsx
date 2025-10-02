@@ -64,10 +64,14 @@ export const PortfolioProvider: React.FC<PortfolioProviderProps> = ({ children }
       const totalAllocated = updatedStocks.reduce((sum, s) => sum + s.allocatedValue, 0);
       const stocksWithPercentages = calculatePercentages(updatedStocks, totalAllocated);
       
+      // Abater o valor alocado do caixa disponível
+      const newCashAmount = Math.max(0, prev.cashAmount - stock.allocatedValue);
+      
       return {
         ...prev,
         stocks: stocksWithPercentages,
         totalValue: totalAllocated,
+        cashAmount: newCashAmount,
         updatedAt: new Date()
       };
     });
@@ -115,14 +119,21 @@ export const PortfolioProvider: React.FC<PortfolioProviderProps> = ({ children }
     setPortfolio(prev => {
       if (!prev) return prev;
       
+      const removedStock = prev.stocks.find(stock => stock.id === id);
+      const removedValue = removedStock?.allocatedValue || 0;
+      
       const updatedStocks = prev.stocks.filter(stock => stock.id !== id);
       const totalAllocated = updatedStocks.reduce((sum, s) => sum + s.allocatedValue, 0);
       const stocksWithPercentages = calculatePercentages(updatedStocks, totalAllocated);
+      
+      // Devolver o valor alocado ao caixa
+      const newCashAmount = prev.cashAmount + removedValue;
       
       return {
         ...prev,
         stocks: stocksWithPercentages,
         totalValue: totalAllocated,
+        cashAmount: newCashAmount,
         updatedAt: new Date()
       };
     });
