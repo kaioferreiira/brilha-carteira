@@ -15,8 +15,8 @@ export const AddContributionDialog: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    const amount = parseFloat(contributionAmount.replace(/[^\d,.-]/g, '').replace(',', '.'));
-    
+    const digits = contributionAmount.replace(/\D/g, "");
+    const amount = digits ? Number(digits) / 100 : 0;
     if (isNaN(amount) || amount <= 0) {
       toast({
         title: "Valor inválido",
