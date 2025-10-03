@@ -10,7 +10,6 @@ export interface Stock {
   symbol: string;
   name: string;
   allocatedValue: number;
-  weight: number;
   percentage: number;
   currentValue?: number;
   variation?: number;

@@ -51,6 +51,16 @@ export const PortfolioProvider: React.FC<PortfolioProviderProps> = ({ children }
   const addStock = useCallback((newStock: Omit<Stock, 'id' | 'percentage'>) => {
     if (!portfolio) return;
 
+    // Verificar se há caixa suficiente
+    if (newStock.allocatedValue > portfolio.cashAmount) {
+      toast({
+        title: "Caixa insuficiente",
+        description: `Você tem apenas R$ ${portfolio.cashAmount.toFixed(2)} disponível.`,
+        variant: "destructive",
+      });
+      return;
+    }
+
     setPortfolio(prev => {
       if (!prev) return prev;
       
@@ -189,13 +199,12 @@ export const PortfolioProvider: React.FC<PortfolioProviderProps> = ({ children }
 
   const calculateProjection = useCallback(() => {
     if (!portfolio) return {};
-
-    const totalWeight = portfolio.stocks.reduce((sum, stock) => sum + stock.weight, 0);
+    
+    // Removida lógica de peso - agora só retorna os valores já alocados
     const projection: { [stockId: string]: number } = {};
-
+    
     portfolio.stocks.forEach(stock => {
-      const stockWeight = totalWeight > 0 ? stock.weight / totalWeight : 0;
-      projection[stock.id] = portfolio.cashAmount * stockWeight;
+      projection[stock.id] = stock.allocatedValue;
     });
 
     return projection;

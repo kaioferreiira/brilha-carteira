@@ -216,13 +216,8 @@ const Portfolio: React.FC = () => {
                     onClick={() => setShowProjection(!showProjection)}
                     className="rounded-full"
                   >
-                    {showProjection ? 'Ocultar' : 'Ver'} Projeção de Aporte
+                    {showProjection ? 'Ocultar' : 'Ver'} Valores Alocados
                   </Button>
-                  {showProjection && (
-                    <p className="text-sm text-muted-foreground">
-                      Baseado nos pesos configurados
-                    </p>
-                  )}
                 </div>
               )}
             </CardContent>
@@ -281,6 +276,7 @@ const Portfolio: React.FC = () => {
               setIsDialogOpen(open);
               if (!open) setEditingStock(null);
             }}
+            availableCash={portfolio.cashAmount}
           />
         </motion.div>
 

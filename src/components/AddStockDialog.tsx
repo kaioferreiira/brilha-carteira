@@ -14,8 +14,7 @@ import { Stock } from '@/types';
 const stockSchema = z.object({
   symbol: z.string().min(1, 'Símbolo é obrigatório').max(10, 'Máximo 10 caracteres'),
   name: z.string().min(1, 'Nome é obrigatório').max(50, 'Máximo 50 caracteres'),
-  weight: z.number().min(1, 'Peso deve ser pelo menos 1').max(10, 'Peso máximo é 10'),
-  allocatedValue: z.number().min(0, 'Valor deve ser positivo'),
+  allocatedValue: z.number().min(0.01, 'Valor deve ser positivo'),
 });
 
 type StockFormData = z.infer<typeof stockSchema>;
@@ -26,6 +25,7 @@ interface AddStockDialogProps {
   onUpdateStock?: (id: string, updates: Partial<Stock>) => void;
   isOpen: boolean;
   onOpenChange: (open: boolean) => void;
+  availableCash: number;
 }
 
 export const AddStockDialog: React.FC<AddStockDialogProps> = ({
@@ -34,6 +34,7 @@ export const AddStockDialog: React.FC<AddStockDialogProps> = ({
   onUpdateStock,
   isOpen,
   onOpenChange,
+  availableCash,
 }) => {
   const {
     register,
@@ -41,12 +42,13 @@ export const AddStockDialog: React.FC<AddStockDialogProps> = ({
     formState: { errors, isSubmitting },
     reset,
     setValue,
+    setError,
+    clearErrors,
   } = useForm<StockFormData>({
     resolver: zodResolver(stockSchema),
     defaultValues: {
       symbol: '',
       name: '',
-      weight: 1,
       allocatedValue: 0,
     },
   });
@@ -55,7 +57,6 @@ export const AddStockDialog: React.FC<AddStockDialogProps> = ({
     if (editingStock) {
       setValue('symbol', editingStock.symbol);
       setValue('name', editingStock.name);
-      setValue('weight', editingStock.weight);
       setValue('allocatedValue', editingStock.allocatedValue);
     } else {
       reset();
@@ -63,10 +64,22 @@ export const AddStockDialog: React.FC<AddStockDialogProps> = ({
   }, [editingStock, setValue, reset]);
 
   const onSubmit = async (data: StockFormData) => {
+    // Validar se há caixa disponível suficiente
+    const maxAvailable = editingStock 
+      ? availableCash + editingStock.allocatedValue 
+      : availableCash;
+    
+    if (data.allocatedValue > maxAvailable) {
+      setError('allocatedValue', {
+        type: 'manual',
+        message: `Caixa insuficiente. Disponível: R$ ${maxAvailable.toFixed(2)}`,
+      });
+      return;
+    }
+
     const stockData = {
       symbol: data.symbol,
       name: data.name,
-      weight: data.weight,
       allocatedValue: data.allocatedValue,
     };
 
@@ -102,39 +115,19 @@ export const AddStockDialog: React.FC<AddStockDialogProps> = ({
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
         >
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label htmlFor="symbol" className="text-sm font-medium">
-                Símbolo *
-              </Label>
-              <Input
-                id="symbol"
-                placeholder="ex: PETR4"
-                className="h-12 rounded-xl border-0 bg-muted"
-                {...register('symbol')}
-              />
-              {errors.symbol && (
-                <p className="text-destructive text-xs">{errors.symbol.message}</p>
-              )}
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="weight" className="text-sm font-medium">
-                Peso
-              </Label>
-              <Input
-                id="weight"
-                type="number"
-                min="1"
-                max="10"
-                placeholder="1"
-                className="h-12 rounded-xl border-0 bg-muted"
-                {...register('weight', { valueAsNumber: true })}
-              />
-              {errors.weight && (
-                <p className="text-destructive text-xs">{errors.weight.message}</p>
-              )}
-            </div>
+          <div className="space-y-2">
+            <Label htmlFor="symbol" className="text-sm font-medium">
+              Símbolo *
+            </Label>
+            <Input
+              id="symbol"
+              placeholder="ex: PETR4"
+              className="h-12 rounded-xl border-0 bg-muted"
+              {...register('symbol')}
+            />
+            {errors.symbol && (
+              <p className="text-destructive text-xs">{errors.symbol.message}</p>
+            )}
           </div>
 
           <div className="space-y-2">
@@ -156,6 +149,9 @@ export const AddStockDialog: React.FC<AddStockDialogProps> = ({
             <Label htmlFor="allocatedValue" className="text-sm font-medium">
               Valor Alocado *
             </Label>
+            <div className="text-xs text-muted-foreground mb-1">
+              Disponível: R$ {availableCash.toFixed(2)}
+            </div>
             <Input
               id="allocatedValue"
               type="number"
@@ -164,6 +160,10 @@ export const AddStockDialog: React.FC<AddStockDialogProps> = ({
               placeholder="0.00"
               className="h-12 rounded-xl border-0 bg-muted"
               {...register('allocatedValue', { valueAsNumber: true })}
+              onChange={(e) => {
+                clearErrors('allocatedValue');
+                register('allocatedValue', { valueAsNumber: true }).onChange(e);
+              }}
             />
             {errors.allocatedValue && (
               <p className="text-destructive text-xs">{errors.allocatedValue.message}</p>

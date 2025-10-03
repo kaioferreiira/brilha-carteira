@@ -99,13 +99,6 @@ export const StockCard: React.FC<StockCardProps> = ({
             </span>
           </div>
 
-          <div className="flex justify-between items-center">
-            <span className="text-sm text-muted-foreground">Peso</span>
-            <span className="font-medium text-foreground">
-              {stock.weight}x
-            </span>
-          </div>
-
           {projectedValue !== undefined && (
             <motion.div
               initial={{ opacity: 0, height: 0 }}
