@@ -200,11 +200,17 @@ export const PortfolioProvider: React.FC<PortfolioProviderProps> = ({ children }
   const calculateProjection = useCallback(() => {
     if (!portfolio) return {};
     
-    // Removida lógica de peso - agora só retorna os valores já alocados
     const projection: { [stockId: string]: number } = {};
     
+    // Se não houver ações, retorna vazio
+    if (portfolio.stocks.length === 0) return projection;
+    
+    // Distribui o valor em caixa igualmente entre todas as ações
+    const valuePerStock = portfolio.cashAmount / portfolio.stocks.length;
+    
     portfolio.stocks.forEach(stock => {
-      projection[stock.id] = stock.allocatedValue;
+      // Soma o valor já alocado com a projeção do próximo aporte
+      projection[stock.id] = stock.allocatedValue + valuePerStock;
     });
 
     return projection;
