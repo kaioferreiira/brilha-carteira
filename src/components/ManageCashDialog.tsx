@@ -32,7 +32,7 @@ export const ManageCashDialog: React.FC = () => {
     if (operation === 'remove' && amount > (portfolio?.cashAmount || 0)) {
       toast({
         title: "Saldo insuficiente",
-        description: `Você tem apenas ${formatCurrency((portfolio?.cashAmount || 0).toString())} disponível.`,
+        description: `Você tem apenas ${formatCurrencyValue(portfolio?.cashAmount || 0)} disponível.`,
         variant: "destructive",
       });
       return;
@@ -51,7 +51,7 @@ export const ManageCashDialog: React.FC = () => {
     });
   };
 
-  const formatCurrency = (value: string) => {
+  const formatCurrencyInput = (value: string) => {
     const numericValue = value.replace(/[^\d]/g, '');
     const formatted = new Intl.NumberFormat('pt-BR', {
       style: 'currency',
@@ -60,8 +60,15 @@ export const ManageCashDialog: React.FC = () => {
     return formatted;
   };
 
+  const formatCurrencyValue = (value: number) => {
+    return new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL'
+    }).format(value);
+  };
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const formatted = formatCurrency(e.target.value);
+    const formatted = formatCurrencyInput(e.target.value);
     setCashAmount(formatted);
   };
 
@@ -112,7 +119,7 @@ export const ManageCashDialog: React.FC = () => {
 
           <div className="p-3 bg-muted rounded-lg">
             <p className="text-sm text-muted-foreground">
-              Saldo atual: <span className="font-semibold text-foreground">{formatCurrency((portfolio?.cashAmount || 0).toString())}</span>
+              Saldo atual: <span className="font-semibold text-foreground">{formatCurrencyValue(portfolio?.cashAmount || 0)}</span>
             </p>
           </div>
           

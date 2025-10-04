@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -36,6 +36,8 @@ export const AddStockDialog: React.FC<AddStockDialogProps> = ({
   onOpenChange,
   availableCash,
 }) => {
+  const [allocatedValueDisplay, setAllocatedValueDisplay] = useState('');
+  
   const {
     register,
     handleSubmit,
@@ -58,10 +60,31 @@ export const AddStockDialog: React.FC<AddStockDialogProps> = ({
       setValue('symbol', editingStock.symbol);
       setValue('name', editingStock.name);
       setValue('allocatedValue', editingStock.allocatedValue);
+      setAllocatedValueDisplay(formatCurrencyInput((editingStock.allocatedValue * 100).toString()));
     } else {
       reset();
+      setAllocatedValueDisplay('');
     }
   }, [editingStock, setValue, reset]);
+
+  const formatCurrencyInput = (value: string) => {
+    const numericValue = value.replace(/[^\d]/g, '');
+    const formatted = new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL'
+    }).format(parseFloat(numericValue) / 100 || 0);
+    return formatted;
+  };
+
+  const handleAllocatedValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formatted = formatCurrencyInput(e.target.value);
+    setAllocatedValueDisplay(formatted);
+    
+    const digits = formatted.replace(/\D/g, "");
+    const amount = digits ? Number(digits) / 100 : 0;
+    setValue('allocatedValue', amount);
+    clearErrors('allocatedValue');
+  };
 
   const onSubmit = async (data: StockFormData) => {
     // Validar se há caixa disponível suficiente
@@ -154,16 +177,12 @@ export const AddStockDialog: React.FC<AddStockDialogProps> = ({
             </div>
             <Input
               id="allocatedValue"
-              type="number"
-              min="0"
-              step="0.01"
-              placeholder="0.00"
+              type="text"
+              placeholder="R$ 0,00"
               className="h-12 rounded-xl border-0 bg-muted"
-              {...register('allocatedValue', { valueAsNumber: true })}
-              onChange={(e) => {
-                clearErrors('allocatedValue');
-                register('allocatedValue', { valueAsNumber: true }).onChange(e);
-              }}
+              value={allocatedValueDisplay}
+              onChange={handleAllocatedValueChange}
+              required
             />
             {errors.allocatedValue && (
               <p className="text-destructive text-xs">{errors.allocatedValue.message}</p>
