@@ -4,20 +4,20 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { PlusCircle, MinusCircle } from 'lucide-react';
+import { Settings, PlusCircle, MinusCircle } from 'lucide-react';
 import { usePortfolio } from '@/contexts/PortfolioContext';
 import { toast } from '@/hooks/use-toast';
 
-export const AddContributionDialog: React.FC = () => {
+export const ManageCashDialog: React.FC = () => {
   const [open, setOpen] = useState(false);
-  const [contributionAmount, setContributionAmount] = useState('');
+  const [cashAmount, setCashAmount] = useState('');
   const [operation, setOperation] = useState<'add' | 'remove'>('add');
   const { portfolio, updateCash } = usePortfolio();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    const digits = contributionAmount.replace(/\D/g, "");
+    const digits = cashAmount.replace(/\D/g, "");
     const amount = digits ? Number(digits) / 100 : 0;
     if (isNaN(amount) || amount <= 0) {
       toast({
@@ -42,12 +42,12 @@ export const AddContributionDialog: React.FC = () => {
     const finalAmount = operation === 'add' ? amount : -amount;
     updateCash(finalAmount);
     
-    setContributionAmount('');
+    setCashAmount('');
     setOpen(false);
     
     toast({
-      title: operation === 'add' ? "Aporte realizado!" : "Retirada realizada!",
-      description: `R$ ${amount.toFixed(2)} ${operation === 'add' ? 'adicionado ao' : 'removido do'} seu caixa.`,
+      title: operation === 'add' ? "Valor adicionado!" : "Valor removido!",
+      description: `R$ ${amount.toFixed(2)} ${operation === 'add' ? 'adicionado ao' : 'removido do'} caixa.`,
     });
   };
 
@@ -62,15 +62,15 @@ export const AddContributionDialog: React.FC = () => {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const formatted = formatCurrency(e.target.value);
-    setContributionAmount(formatted);
+    setCashAmount(formatted);
   };
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button className="w-full" size="lg">
-          <PlusCircle className="mr-2 h-5 w-5" />
-          Realizar Aporte
+        <Button variant="outline" size="sm">
+          <Settings className="mr-2 h-4 w-4" />
+          Gerenciar Caixa
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
@@ -99,12 +99,12 @@ export const AddContributionDialog: React.FC = () => {
           </div>
           
           <div className="space-y-2">
-            <Label htmlFor="contribution">Valor</Label>
+            <Label htmlFor="cashValue">Valor</Label>
             <Input
-              id="contribution"
+              id="cashValue"
               type="text"
               placeholder="R$ 0,00"
-              value={contributionAmount}
+              value={cashAmount}
               onChange={handleInputChange}
               required
             />
