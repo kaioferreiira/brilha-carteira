@@ -10,6 +10,7 @@ import { ProtectedRoute } from "@/components/ProtectedRoute";
 import Welcome from "./pages/Welcome";
 import Login from "./pages/Login";
 import Portfolio from "./pages/Portfolio";
+import RecommendedPortfolio from "./pages/RecommendedPortfolio";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -30,6 +31,14 @@ const App = () => (
                 element={
                   <ProtectedRoute>
                     <Portfolio />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/carteira-recomendada" 
+                element={
+                  <ProtectedRoute>
+                    <RecommendedPortfolio />
                   </ProtectedRoute>
                 } 
               />

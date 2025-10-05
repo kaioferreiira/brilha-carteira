@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { LogOut, DollarSign, TrendingUp, PieChart as PieChartIcon, Plus, Wallet, Settings } from 'lucide-react';
+import { LogOut, DollarSign, TrendingUp, PieChart as PieChartIcon, Plus, Wallet, Settings, FileText } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -19,6 +20,7 @@ import { ManageCashDialog } from '@/components/ManageCashDialog';
 const Portfolio: React.FC = () => {
   const { user, logout } = useAuth();
   const { portfolio } = usePortfolio();
+  const navigate = useNavigate();
 
   const formatCurrency = (value: number) => {
     return new Intl.NumberFormat('pt-BR', {
@@ -75,13 +77,24 @@ const Portfolio: React.FC = () => {
             </div>
           </div>
 
-          <Button
-            variant="ghost"
-            onClick={logout}
-            className="text-muted-foreground hover:text-foreground"
-          >
-            <LogOut size={20} />
-          </Button>
+          <div className="flex items-center gap-2">
+            <Button
+              variant="outline"
+              onClick={() => navigate('/carteira-recomendada')}
+              className="gap-2"
+            >
+              <FileText size={18} />
+              Carteira Recomendada
+            </Button>
+            
+            <Button
+              variant="ghost"
+              onClick={logout}
+              className="text-muted-foreground hover:text-foreground"
+            >
+              <LogOut size={20} />
+            </Button>
+          </div>
         </div>
       </motion.header>
 
