@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { ArrowLeft, Bell } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
@@ -21,7 +20,6 @@ interface Asset {
 
 const RecommendedPortfolio = () => {
   const navigate = useNavigate();
-  const [hasViewed, setHasViewed] = useState(false);
 
   const referenceDate = "11/08/25";
   const lastUpdateDate = "08 de Agosto de 2025";
@@ -40,38 +38,20 @@ const RecommendedPortfolio = () => {
 
   const cashAllocation = 10;
 
-  const handleViewUpdate = () => {
-    setHasViewed(true);
-  };
-
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="border-b bg-card/50 backdrop-blur-sm sticky top-0 z-10">
         <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => navigate("/portfolio")}
-              className="gap-2"
-            >
-              <ArrowLeft size={18} />
-              Voltar
-            </Button>
-
-            <Button
-              onClick={handleViewUpdate}
-              className={`gap-2 ${
-                hasViewed
-                  ? "bg-blue-600 hover:bg-blue-700"
-                  : "bg-green-600 hover:bg-green-700 animate-pulse"
-              }`}
-            >
-              <Bell size={18} />
-              Ver Carteira Atualizada
-            </Button>
-          </div>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => navigate("/portfolio")}
+            className="gap-2"
+          >
+            <ArrowLeft size={18} />
+            Voltar
+          </Button>
         </div>
       </header>
 
