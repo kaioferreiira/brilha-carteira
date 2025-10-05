@@ -14,6 +14,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { usePortfolio } from '@/contexts/PortfolioContext';
 import { StocksSection } from '@/components/StocksSection';
 import { PieChart } from '@/components/PieChart';
+import { ManageCashDialog } from '@/components/ManageCashDialog';
 
 const Portfolio: React.FC = () => {
   const { user, logout } = useAuth();
@@ -116,13 +117,14 @@ const Portfolio: React.FC = () => {
                 Caixa Disponível
               </CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="space-y-3">
               <p className="text-2xl font-bold text-primary">
                 {formatCurrency(portfolio.cashAmount)}
               </p>
               <p className="text-sm text-muted-foreground">
                 Para novos aportes
               </p>
+              <ManageCashDialog />
             </CardContent>
           </Card>
         </motion.div>

@@ -6,7 +6,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { usePortfolio } from '@/contexts/PortfolioContext';
 import { StockCard } from '@/components/StockCard';
 import { AddStockDialog } from '@/components/AddStockDialog';
-import { ManageCashDialog } from '@/components/ManageCashDialog';
 import { Stock } from '@/types';
 
 export const StocksSection: React.FC = () => {
@@ -51,7 +50,14 @@ export const StocksSection: React.FC = () => {
                 <TrendingUp size={20} className="mr-2 text-primary" />
                 Ações
               </div>
-              <ManageCashDialog />
+              <Button
+                onClick={handleAddStock}
+                size="sm"
+                className="shadow-elegant"
+              >
+                <Plus size={16} className="mr-1" />
+                Adicionar Nova Ação
+              </Button>
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
