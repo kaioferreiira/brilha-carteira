@@ -45,19 +45,9 @@ export const StocksSection: React.FC = () => {
       >
         <Card className="bg-gradient-card border-0 shadow-card">
           <CardHeader>
-            <CardTitle className="text-lg font-semibold flex items-center justify-between">
-              <div className="flex items-center">
-                <TrendingUp size={20} className="mr-2 text-primary" />
-                Ações
-              </div>
-              <Button
-                onClick={handleAddStock}
-                size="sm"
-                className="shadow-elegant"
-              >
-                <Plus size={16} className="mr-1" />
-                Adicionar Nova Ação
-              </Button>
+            <CardTitle className="text-lg font-semibold flex items-center">
+              <TrendingUp size={20} className="mr-2 text-primary" />
+              Ações
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -128,7 +118,7 @@ export const StocksSection: React.FC = () => {
               className="rounded-full bg-primary hover:bg-primary/90 shadow-kinvo"
             >
               <Plus size={20} className="mr-2" />
-              Adicionar Primeira Ação
+              Adicionar Ação
             </Button>
           </motion.div>
         )}
