@@ -9,7 +9,7 @@ import { Eye, EyeOff, ArrowRight, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { KinvoLogo } from '@/components/KinvoLogo';
+import { UpfolioLogo } from '@/components/UpfolioLogo';
 import { useAuth } from '@/contexts/AuthContext';
 
 const loginSchema = z.object({
@@ -69,7 +69,7 @@ const Login: React.FC = () => {
           animate="visible"
           transition={{ duration: 0.6 }}
         >
-          <KinvoLogo size="lg" />
+          <UpfolioLogo size="lg" />
         </motion.div>
 
         {/* Title Section */}
@@ -81,7 +81,7 @@ const Login: React.FC = () => {
           transition={{ duration: 0.6, delay: 0.1 }}
         >
           <p className="text-primary text-base font-medium mb-2">
-            Entre no Kinvo ou crie uma conta
+            Entre no Upfolio ou crie uma conta
           </p>
           <h1 className="text-kinvo-navy text-2xl font-semibold leading-tight">
             Informe seu e-mail de cadastro e senha.

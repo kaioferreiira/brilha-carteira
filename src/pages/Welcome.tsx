@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { KinvoLogo } from '@/components/KinvoLogo';
+import { UpfolioLogo } from '@/components/UpfolioLogo';
 import heroBackground from '@/assets/hero-background.jpg';
 
 const Welcome: React.FC = () => {
@@ -39,7 +39,7 @@ const Welcome: React.FC = () => {
           transition={{ duration: 6, repeat: Infinity }}
         >
           <div className="p-6 flex items-center justify-center h-full">
-            <KinvoLogo size="lg" />
+            <UpfolioLogo size="lg" />
           </div>
         </motion.div>
 
@@ -77,7 +77,7 @@ const Welcome: React.FC = () => {
               Olá! Que bom te ver aqui.
             </p>
             <h1 className="text-white text-4xl font-bold leading-tight mb-4">
-              Sua jornada como investidor fica mais rica com o Kinvo.
+              Sua jornada como investidor fica mais rica com o Upfolio.
             </h1>
             <p className="text-white/80 text-lg">
               Vamos começar?

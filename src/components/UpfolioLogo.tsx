@@ -1,13 +1,13 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
 
-interface KinvoLogoProps {
+interface UpfolioLogoProps {
   className?: string;
   size?: 'sm' | 'md' | 'lg';
   collapsed?: boolean;
 }
 
-export const KinvoLogo: React.FC<KinvoLogoProps> = ({ className, size = 'md', collapsed = false }) => {
+export const UpfolioLogo: React.FC<UpfolioLogoProps> = ({ className, size = 'md', collapsed = false }) => {
   const sizes = {
     sm: 'w-8 h-8',
     md: 'w-12 h-12',
@@ -29,7 +29,7 @@ export const KinvoLogo: React.FC<KinvoLogoProps> = ({ className, size = 'md', co
         </div>
       </div>
       {!collapsed && (
-        <span className="text-xl font-bold gradient-text">Kinvo</span>
+        <span className="text-xl font-bold gradient-text">Upfolio</span>
       )}
     </div>
   );

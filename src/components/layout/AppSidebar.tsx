@@ -12,7 +12,7 @@ import {
   SidebarFooter,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { KinvoLogo } from "@/components/KinvoLogo";
+import { UpfolioLogo } from "@/components/UpfolioLogo";
 import { Separator } from "@/components/ui/separator";
 
 const menuItems = [
@@ -62,7 +62,7 @@ export function AppSidebar() {
       <SidebarContent>
         {/* Logo */}
         <div className="flex h-16 items-center px-4 border-b">
-          <KinvoLogo collapsed={!open} />
+          <UpfolioLogo collapsed={!open} />
         </div>
 
         {/* Main Navigation */}
@@ -112,7 +112,7 @@ export function AppSidebar() {
       {/* Footer */}
       <SidebarFooter className="border-t p-4">
         <div className="flex items-center gap-2 text-xs text-muted-foreground">
-          {open && <span>© 2025 Kinvo</span>}
+          {open && <span>© 2025 Upfolio</span>}
         </div>
       </SidebarFooter>
     </Sidebar>
