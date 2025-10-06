@@ -3,13 +3,22 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Plus } from 'lucide-react';
+import { X, Plus, Search, Check } from 'lucide-react';
 
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '@/components/ui/command';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Stock } from '@/types';
+
+interface StockAPI {
+  stock: string;
+  name: string;
+  close: number;
+  logo: string;
+}
 
 const stockSchema = z.object({
   symbol: z.string().min(1, 'Símbolo é obrigatório').max(10, 'Máximo 10 caracteres'),
@@ -37,6 +46,10 @@ export const AddStockDialog: React.FC<AddStockDialogProps> = ({
   availableCash,
 }) => {
   const [allocatedValueDisplay, setAllocatedValueDisplay] = useState('');
+  const [stocks, setStocks] = useState<StockAPI[]>([]);
+  const [loadingStocks, setLoadingStocks] = useState(false);
+  const [openCombobox, setOpenCombobox] = useState(false);
+  const [selectedStock, setSelectedStock] = useState<StockAPI | null>(null);
   
   const {
     register,
@@ -56,16 +69,50 @@ export const AddStockDialog: React.FC<AddStockDialogProps> = ({
   });
 
   useEffect(() => {
+    if (isOpen && !editingStock) {
+      fetchStocks();
+    }
+  }, [isOpen, editingStock]);
+
+  const fetchStocks = async () => {
+    setLoadingStocks(true);
+    try {
+      const response = await fetch('https://brapi.dev/api/quote/list', {
+        headers: {
+          'Authorization': 'Bearer rTpKKDnw8sqGZ38ZWAZEsC'
+        }
+      });
+      const data = await response.json();
+      setStocks(data.stocks || []);
+    } catch (error) {
+      console.error('Error fetching stocks:', error);
+    } finally {
+      setLoadingStocks(false);
+    }
+  };
+
+  useEffect(() => {
     if (editingStock) {
       setValue('symbol', editingStock.symbol);
       setValue('name', editingStock.name);
       setValue('allocatedValue', editingStock.allocatedValue);
       setAllocatedValueDisplay(formatCurrencyInput((editingStock.allocatedValue * 100).toString()));
+      setSelectedStock(null);
     } else {
       reset();
       setAllocatedValueDisplay('');
+      setSelectedStock(null);
     }
   }, [editingStock, setValue, reset]);
+
+  const handleSelectStock = (stock: StockAPI) => {
+    setSelectedStock(stock);
+    setValue('symbol', stock.stock);
+    setValue('name', stock.name);
+    setOpenCombobox(false);
+    clearErrors('symbol');
+    clearErrors('name');
+  };
 
   const formatCurrencyInput = (value: string) => {
     const numericValue = value.replace(/[^\d]/g, '');
@@ -87,7 +134,6 @@ export const AddStockDialog: React.FC<AddStockDialogProps> = ({
   };
 
   const onSubmit = async (data: StockFormData) => {
-    // Validar se há caixa disponível suficiente
     const maxAvailable = editingStock 
       ? availableCash + editingStock.allocatedValue 
       : availableCash;
@@ -112,6 +158,7 @@ export const AddStockDialog: React.FC<AddStockDialogProps> = ({
       onAddStock(stockData);
     }
     reset();
+    setSelectedStock(null);
     onOpenChange(false);
   };
 
@@ -138,35 +185,88 @@ export const AddStockDialog: React.FC<AddStockDialogProps> = ({
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
         >
-          <div className="space-y-2">
-            <Label htmlFor="symbol" className="text-sm font-medium">
-              Símbolo *
-            </Label>
-            <Input
-              id="symbol"
-              placeholder="ex: PETR4"
-              className="h-12 rounded-xl border-0 bg-muted"
-              {...register('symbol')}
-            />
-            {errors.symbol && (
-              <p className="text-destructive text-xs">{errors.symbol.message}</p>
-            )}
-          </div>
+          {!editingStock && (
+            <div className="space-y-2">
+              <Label className="text-sm font-medium">
+                Selecionar Ação *
+              </Label>
+              <Popover open={openCombobox} onOpenChange={setOpenCombobox}>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant="outline"
+                    role="combobox"
+                    aria-expanded={openCombobox}
+                    className="w-full h-12 rounded-xl border-0 bg-muted justify-between"
+                  >
+                    {selectedStock ? (
+                      <div className="flex items-center gap-2">
+                        <img src={selectedStock.logo} alt="" className="w-5 h-5 rounded" />
+                        <span>{selectedStock.stock}</span>
+                      </div>
+                    ) : (
+                      <span className="text-muted-foreground">Buscar ação...</span>
+                    )}
+                    <Search className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-full p-0" align="start">
+                  <Command>
+                    <CommandInput placeholder="Buscar ação..." />
+                    <CommandList>
+                      <CommandEmpty>
+                        {loadingStocks ? 'Carregando...' : 'Nenhuma ação encontrada.'}
+                      </CommandEmpty>
+                      <CommandGroup>
+                        {stocks.map((stock) => (
+                          <CommandItem
+                            key={stock.stock}
+                            value={stock.stock}
+                            onSelect={() => handleSelectStock(stock)}
+                            className="flex items-center gap-2"
+                          >
+                            <img src={stock.logo} alt="" className="w-6 h-6 rounded" />
+                            <div className="flex flex-col">
+                              <span className="font-medium">{stock.stock}</span>
+                              <span className="text-xs text-muted-foreground truncate">{stock.name}</span>
+                            </div>
+                            {selectedStock?.stock === stock.stock && (
+                              <Check className="ml-auto h-4 w-4" />
+                            )}
+                          </CommandItem>
+                        ))}
+                      </CommandGroup>
+                    </CommandList>
+                  </Command>
+                </PopoverContent>
+              </Popover>
+              {errors.symbol && (
+                <p className="text-destructive text-xs">{errors.symbol.message}</p>
+              )}
+            </div>
+          )}
 
-          <div className="space-y-2">
-            <Label htmlFor="name" className="text-sm font-medium">
-              Nome da Empresa *
-            </Label>
-            <Input
-              id="name"
-              placeholder="ex: Petrobras S.A."
-              className="h-12 rounded-xl border-0 bg-muted"
-              {...register('name')}
-            />
-            {errors.name && (
-              <p className="text-destructive text-xs">{errors.name.message}</p>
-            )}
-          </div>
+          {(selectedStock || editingStock) && (
+            <>
+              <div className="space-y-2">
+                <Label className="text-sm font-medium">
+                  Ação Selecionada
+                </Label>
+                <div className="flex items-center gap-3 p-3 rounded-xl bg-muted/50">
+                  {selectedStock && (
+                    <img src={selectedStock.logo} alt="" className="w-8 h-8 rounded" />
+                  )}
+                  <div className="flex flex-col">
+                    <span className="font-bold text-lg">
+                      {editingStock ? editingStock.symbol : selectedStock?.stock}
+                    </span>
+                    <span className="text-sm text-muted-foreground">
+                      {editingStock ? editingStock.name : selectedStock?.name}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
 
           <div className="space-y-2">
             <Label htmlFor="allocatedValue" className="text-sm font-medium">
