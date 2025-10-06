@@ -1,7 +1,5 @@
-import { ArrowLeft } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { useNavigate } from "react-router-dom";
+import { AppLayout } from "@/components/layout/AppLayout";
 import {
   Table,
   TableBody,
@@ -19,8 +17,6 @@ interface Asset {
 }
 
 const RecommendedPortfolio = () => {
-  const navigate = useNavigate();
-
   const referenceDate = "11/08/25";
   const lastUpdateDate = "08 de Agosto de 2025";
   const analystName = "Renato Calonga";
@@ -39,21 +35,7 @@ const RecommendedPortfolio = () => {
   const cashAllocation = 10;
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b bg-card/50 backdrop-blur-sm sticky top-0 z-10">
-        <div className="container mx-auto px-4 py-4">
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => navigate("/portfolio")}
-            className="gap-2"
-          >
-            <ArrowLeft size={18} />
-            Voltar
-          </Button>
-        </div>
-      </header>
+    <AppLayout>
 
       {/* Main Content */}
       <main className="container mx-auto px-4 py-8 max-w-5xl">
@@ -166,7 +148,7 @@ const RecommendedPortfolio = () => {
           </CardContent>
         </Card>
       </main>
-    </div>
+    </AppLayout>
   );
 };
 

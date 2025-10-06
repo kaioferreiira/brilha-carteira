@@ -197,6 +197,29 @@ All colors MUST be HSL.
   .text-balance {
     text-wrap: balance;
   }
+
+  /* Background Patterns */
+  .bg-grid-pattern {
+    background-image: 
+      linear-gradient(to right, hsl(var(--border) / 0.1) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--border) / 0.1) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .bg-dots-pattern {
+    background-image: radial-gradient(circle, hsl(var(--primary) / 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+
+  /* Smooth transitions */
+  .transition-smooth {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Hover effects */
+  .hover-lift {
+    @apply transition-smooth hover:-translate-y-1 hover:shadow-float;
+  }
 }
 
 @keyframes float {
@@ -214,5 +237,25 @@ All colors MUST be HSL.
   }
   50% {
     box-shadow: 0 0 40px hsl(var(--primary) / 0.6);
+  }
+}
+
+@keyframes slide-in-left {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
   }
 }
