@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { Eye, EyeOff, ArrowRight, User } from 'lucide-react';
+import { Eye, EyeOff, Mail, Lock, TrendingUp, Shield } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -13,7 +13,7 @@ import { UpfolioLogo } from '@/components/UpfolioLogo';
 import { useAuth } from '@/contexts/AuthContext';
 
 const loginSchema = z.object({
-  email: z.string().email('Email inválido').nonempty('Email é obrigatório'),
+  email: z.string().email('Email inválido').min(1, 'Email é obrigatório'),
   password: z.string().min(6, 'Senha deve ter pelo menos 6 caracteres'),
 });
 
@@ -45,150 +45,179 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex flex-col">
-      {/* Geometric Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <motion.div
-          className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-gradient-to-br from-primary/10 to-secondary/10"
-          animate={{ scale: [1, 1.1, 1], rotate: [0, 90, 0] }}
-          transition={{ duration: 20, repeat: Infinity }}
-        />
-        <motion.div
-          className="absolute -bottom-32 -left-32 w-80 h-80 rounded-full bg-gradient-to-tr from-accent/10 to-primary/10"
-          animate={{ scale: [1.1, 1, 1.1], rotate: [0, -90, 0] }}
-          transition={{ duration: 15, repeat: Infinity }}
-        />
-      </div>
+    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20 flex items-center justify-center p-4">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-30" />
 
-      <div className="relative z-10 flex flex-col min-h-screen px-6 py-8">
-        {/* Header with Logo */}
-        <motion.div
-          className="flex items-center mb-12"
-          variants={fadeInUp}
-          initial="hidden"
-          animate="visible"
-          transition={{ duration: 0.6 }}
-        >
-          <UpfolioLogo size="lg" />
-        </motion.div>
-
-        {/* Title Section */}
-        <motion.div
-          className="mb-8"
-          variants={fadeInUp}
-          initial="hidden"
-          animate="visible"
-          transition={{ duration: 0.6, delay: 0.1 }}
-        >
-          <p className="text-primary text-base font-medium mb-2">
-            Entre no Upfolio ou crie uma conta
-          </p>
-          <h1 className="text-kinvo-navy text-2xl font-semibold leading-tight">
-            Informe seu e-mail de cadastro e senha.
-          </h1>
-        </motion.div>
-
-        {/* Form */}
-        <motion.form
-          onSubmit={handleSubmit(onSubmit)}
-          className="flex-1 space-y-6"
-          variants={fadeInUp}
-          initial="hidden"
-          animate="visible"
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          <div className="space-y-2">
-            <Label htmlFor="email" className="text-gray-600">
-              E-mail:
-            </Label>
-            <Input
-              id="email"
-              type="email"
-              placeholder="seu@email.com"
-              className="h-12 border-0 bg-gray-100 rounded-xl text-base"
-              {...register('email')}
-            />
-            {errors.email && (
-              <p className="text-destructive text-sm">{errors.email.message}</p>
-            )}
+      <motion.div
+        className="w-full max-w-md relative z-10"
+        variants={fadeInUp}
+        initial="hidden"
+        animate="visible"
+        transition={{ duration: 0.6 }}
+      >
+        {/* Card */}
+        <div className="bg-card border border-border rounded-3xl shadow-2xl p-8 md:p-10">
+          {/* Header */}
+          <div className="text-center mb-8">
+            <motion.h1
+              variants={fadeInUp}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-3xl md:text-4xl font-bold mb-3 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent"
+            >
+              Bem-vindo ao Upfolio
+            </motion.h1>
+            <motion.p
+              variants={fadeInUp}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-muted-foreground text-sm md:text-base"
+            >
+              Sistema avançado de análise de investimentos
+            </motion.p>
           </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="password" className="text-gray-600">
-              Senha:
-            </Label>
-            <div className="relative">
-              <Input
-                id="password"
-                type={showPassword ? 'text' : 'password'}
-                placeholder="••••••••"
-                className="h-12 border-0 bg-gray-100 rounded-xl text-base pr-12"
-                {...register('password')}
-              />
-              <button
-                type="button"
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400"
-                onClick={() => setShowPassword(!showPassword)}
-              >
-                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-              </button>
+          {/* Logo/Icon */}
+          <motion.div
+            variants={fadeInUp}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="flex justify-center mb-6"
+          >
+            <div className="w-20 h-20 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-lg">
+              <TrendingUp className="text-white" size={36} />
             </div>
-            {errors.password && (
-              <p className="text-destructive text-sm">{errors.password.message}</p>
-            )}
-          </div>
+          </motion.div>
 
-          {/* Bottom Section */}
-          <div className="flex-1 flex flex-col justify-end pt-12">
-            <div className="space-y-4">
-              {/* Buttons */}
-              <div className="grid grid-cols-2 gap-4">
-                <Button
+          <motion.div
+            variants={fadeInUp}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="text-center mb-8"
+          >
+            <h2 className="text-xl font-semibold mb-2">Upfolio Pro</h2>
+            <p className="text-muted-foreground text-sm">
+              Sistema profissional de gestão de carteiras
+            </p>
+          </motion.div>
+
+          {/* Form */}
+          <motion.form
+            onSubmit={handleSubmit(onSubmit)}
+            className="space-y-5"
+            variants={fadeInUp}
+            initial="hidden"
+            animate="visible"
+            transition={{ duration: 0.6, delay: 0.5 }}
+          >
+            <div className="space-y-2">
+              <Label htmlFor="email" className="text-sm font-medium">
+                Email profissional
+              </Label>
+              <div className="relative">
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" size={18} />
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="investidor@upfolio.com.br"
+                  className="h-12 pl-10 border-border bg-background rounded-xl text-base"
+                  {...register('email')}
+                />
+              </div>
+              {errors.email && (
+                <p className="text-destructive text-xs mt-1">{errors.email.message}</p>
+              )}
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="password" className="text-sm font-medium">
+                Senha
+              </Label>
+              <div className="relative">
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" size={18} />
+                <Input
+                  id="password"
+                  type={showPassword ? 'text' : 'password'}
+                  placeholder="••••••••"
+                  className="h-12 pl-10 pr-12 border-border bg-background rounded-xl text-base"
+                  {...register('password')}
+                />
+                <button
                   type="button"
-                  variant="secondary"
-                  size="lg"
-                  className="h-14 rounded-full bg-secondary text-white hover:bg-secondary/90 transition-all duration-300"
-                  onClick={() => navigate('/portfolio')}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                  onClick={() => setShowPassword(!showPassword)}
                 >
-                  <User className="mr-2" size={20} />
-                  Criar conta
-                </Button>
-                
-                <Button
-                  type="submit"
-                  size="lg"
-                  disabled={isLoading}
-                  className="h-14 rounded-full bg-primary hover:bg-primary/90 transition-all duration-300 shadow-kinvo"
-                >
-                  {isLoading ? (
-                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white" />
-                  ) : (
-                    <>
-                      Entrar
-                      <ArrowRight className="ml-2" size={20} />
-                    </>
-                  )}
-                </Button>
+                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                </button>
               </div>
-
-              {/* Forgot Password */}
-              <div className="text-center pt-4">
-                <Link
-                  to="/forgot-password"
-                  className="text-gray-600 text-sm hover:text-primary transition-colors"
-                >
-                  Esqueceu a senha?
-                </Link>
-              </div>
-
-              {/* Bottom Indicator */}
-              <div className="flex justify-center pt-6">
-                <div className="w-32 h-1 bg-gray-300 rounded-full" />
-              </div>
+              {errors.password && (
+                <p className="text-destructive text-xs mt-1">{errors.password.message}</p>
+              )}
             </div>
-          </div>
-        </motion.form>
-      </div>
+
+            <Button
+              type="submit"
+              size="lg"
+              disabled={isLoading}
+              className="w-full h-12 text-base font-semibold rounded-xl bg-gradient-to-r from-primary to-secondary hover:opacity-90 transition-all duration-300 shadow-lg"
+            >
+              {isLoading ? (
+                <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white" />
+              ) : (
+                'Acessar Sistema'
+              )}
+            </Button>
+
+            <div className="text-center pt-2">
+              <p className="text-xs text-muted-foreground mb-1">
+                Acesso restrito a investidores cadastrados
+              </p>
+              <p className="text-xs text-muted-foreground">
+                Demo: investidor@upfolio.com.br / 123456
+              </p>
+            </div>
+
+            <div className="text-center pt-2">
+              <Link
+                to="/forgot-password"
+                className="text-sm text-primary hover:text-primary/80 transition-colors"
+              >
+                Esqueceu a senha?
+              </Link>
+            </div>
+          </motion.form>
+
+          {/* Trust Indicators */}
+          <motion.div
+            variants={fadeInUp}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="flex justify-center items-center gap-6 mt-8 pt-6 border-t border-border"
+          >
+            <div className="flex items-center gap-2 text-xs text-muted-foreground">
+              <div className="w-2 h-2 rounded-full bg-green-500" />
+              <span>Sistema Validado</span>
+            </div>
+            <div className="flex items-center gap-2 text-xs text-muted-foreground">
+              <Shield size={14} className="text-green-500" />
+              <span>Dados Seguros</span>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Bottom Link */}
+        <motion.div
+          variants={fadeInUp}
+          transition={{ duration: 0.6, delay: 0.7 }}
+          className="text-center mt-6"
+        >
+          <p className="text-sm text-muted-foreground">
+            Não tem uma conta?{' '}
+            <button
+              onClick={() => navigate('/portfolio')}
+              className="text-primary hover:text-primary/80 font-medium transition-colors"
+            >
+              Criar conta gratuita
+            </button>
+          </p>
+        </motion.div>
+      </motion.div>
     </div>
   );
 };
