@@ -8,28 +8,25 @@ interface UpfolioLogoProps {
 }
 
 export const UpfolioLogo: React.FC<UpfolioLogoProps> = ({ className, size = 'md', collapsed = false }) => {
-  const sizes = {
-    sm: 'w-8 h-8',
-    md: 'w-12 h-12',
-    lg: 'w-16 h-16'
+  const iconSizes = {
+    sm: 'w-8 h-8 text-sm',
+    md: 'w-10 h-10 text-lg',
+    lg: 'w-12 h-12 text-xl'
+  };
+
+  const textSizes = {
+    sm: 'text-base',
+    md: 'text-xl',
+    lg: 'text-2xl'
   };
 
   return (
     <div className={cn('flex items-center gap-3', className)}>
-      <div className={cn('relative', sizes[size])}>
-        <div className="absolute inset-0 rounded-full bg-gradient-kinvo animate-pulse-glow">
-          <div className="flex items-center justify-center w-full h-full">
-            <div className="w-6 h-6 border-2 border-white rounded-full border-t-transparent animate-spin" 
-                 style={{ 
-                   borderWidth: size === 'sm' ? '1.5px' : size === 'md' ? '2px' : '3px',
-                   width: size === 'sm' ? '1rem' : size === 'md' ? '1.5rem' : '2rem',
-                   height: size === 'sm' ? '1rem' : size === 'md' ? '1.5rem' : '2rem'
-                 }} />
-          </div>
-        </div>
+      <div className={cn('rounded-full bg-cyan-500 flex items-center justify-center font-bold text-white', iconSizes[size])}>
+        U
       </div>
       {!collapsed && (
-        <span className="text-xl font-bold gradient-text">Upfolio</span>
+        <span className={cn('font-bold text-cyan-500', textSizes[size])}>Upfolio</span>
       )}
     </div>
   );
