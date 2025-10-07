@@ -11,6 +11,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { UpfolioLogo } from '@/components/UpfolioLogo';
 import { useAuth } from '@/contexts/AuthContext';
+import porscheBg from '@/assets/porsche-bg.jpeg';
 
 const loginSchema = z.object({
   email: z.string().email('Email inválido').min(1, 'Email é obrigatório'),
@@ -45,9 +46,14 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20 flex items-center justify-center p-4">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 bg-grid-pattern opacity-30" />
+    <div className="min-h-screen relative flex items-center justify-center p-4">
+      {/* Background Image */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${porscheBg})` }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/60 to-black/75" />
+      </div>
 
       <motion.div
         className="w-full max-w-md relative z-10"
@@ -57,20 +63,20 @@ const Login: React.FC = () => {
         transition={{ duration: 0.6 }}
       >
         {/* Card */}
-        <div className="bg-card border border-border rounded-3xl shadow-2xl p-8 md:p-10">
+        <div className="bg-white/95 backdrop-blur-md border border-white/20 rounded-3xl shadow-2xl p-8 md:p-10">
           {/* Header */}
           <div className="text-center mb-8">
             <motion.h1
               variants={fadeInUp}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-3xl md:text-4xl font-bold mb-3 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent"
+              className="text-3xl md:text-4xl font-bold mb-3 text-cyan-500"
             >
               Bem-vindo ao Upfolio
             </motion.h1>
             <motion.p
               variants={fadeInUp}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-muted-foreground text-sm md:text-base"
+              className="text-gray-600 text-sm md:text-base"
             >
               Sistema avançado de análise de investimentos
             </motion.p>
@@ -82,7 +88,7 @@ const Login: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="flex justify-center mb-6"
           >
-            <div className="w-20 h-20 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-lg">
+            <div className="w-20 h-20 rounded-full bg-cyan-500 flex items-center justify-center shadow-lg">
               <TrendingUp className="text-white" size={36} />
             </div>
           </motion.div>
@@ -92,8 +98,8 @@ const Login: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="text-center mb-8"
           >
-            <h2 className="text-xl font-semibold mb-2">Upfolio Pro</h2>
-            <p className="text-muted-foreground text-sm">
+            <h2 className="text-xl font-semibold mb-2 text-gray-900">Upfolio Pro</h2>
+            <p className="text-gray-600 text-sm">
               Sistema profissional de gestão de carteiras
             </p>
           </motion.div>
@@ -112,12 +118,12 @@ const Login: React.FC = () => {
                 Email profissional
               </Label>
               <div className="relative">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" size={18} />
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
                 <Input
                   id="email"
                   type="email"
                   placeholder="investidor@upfolio.com.br"
-                  className="h-12 pl-10 border-border bg-background rounded-xl text-base"
+                  className="h-12 pl-10 border-gray-300 bg-white rounded-xl text-base"
                   {...register('email')}
                 />
               </div>
@@ -131,17 +137,17 @@ const Login: React.FC = () => {
                 Senha
               </Label>
               <div className="relative">
-                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" size={18} />
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
                 <Input
                   id="password"
                   type={showPassword ? 'text' : 'password'}
                   placeholder="••••••••"
-                  className="h-12 pl-10 pr-12 border-border bg-background rounded-xl text-base"
+                  className="h-12 pl-10 pr-12 border-gray-300 bg-white rounded-xl text-base"
                   {...register('password')}
                 />
                 <button
                   type="button"
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-700 transition-colors"
                   onClick={() => setShowPassword(!showPassword)}
                 >
                   {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
@@ -156,7 +162,7 @@ const Login: React.FC = () => {
               type="submit"
               size="lg"
               disabled={isLoading}
-              className="w-full h-12 text-base font-semibold rounded-xl bg-gradient-to-r from-primary to-secondary hover:opacity-90 transition-all duration-300 shadow-lg"
+              className="w-full h-12 text-base font-semibold rounded-xl bg-cyan-500 hover:bg-cyan-600 text-white transition-all duration-300 shadow-lg"
             >
               {isLoading ? (
                 <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white" />
@@ -166,10 +172,10 @@ const Login: React.FC = () => {
             </Button>
 
             <div className="text-center pt-2">
-              <p className="text-xs text-muted-foreground mb-1">
+              <p className="text-xs text-gray-500 mb-1">
                 Acesso restrito a investidores cadastrados
               </p>
-              <p className="text-xs text-muted-foreground">
+              <p className="text-xs text-gray-500">
                 Demo: investidor@upfolio.com.br / 123456
               </p>
             </div>
@@ -177,7 +183,7 @@ const Login: React.FC = () => {
             <div className="text-center pt-2">
               <Link
                 to="/forgot-password"
-                className="text-sm text-primary hover:text-primary/80 transition-colors"
+                className="text-sm text-cyan-600 hover:text-cyan-700 transition-colors"
               >
                 Esqueceu a senha?
               </Link>
@@ -188,14 +194,14 @@ const Login: React.FC = () => {
           <motion.div
             variants={fadeInUp}
             transition={{ duration: 0.6, delay: 0.6 }}
-            className="flex justify-center items-center gap-6 mt-8 pt-6 border-t border-border"
+            className="flex justify-center items-center gap-6 mt-8 pt-6 border-t border-gray-200"
           >
-            <div className="flex items-center gap-2 text-xs text-muted-foreground">
-              <div className="w-2 h-2 rounded-full bg-green-500" />
+            <div className="flex items-center gap-2 text-xs text-gray-600">
+              <div className="w-2 h-2 rounded-full bg-cyan-500" />
               <span>Sistema Validado</span>
             </div>
-            <div className="flex items-center gap-2 text-xs text-muted-foreground">
-              <Shield size={14} className="text-green-500" />
+            <div className="flex items-center gap-2 text-xs text-gray-600">
+              <Shield size={14} className="text-cyan-500" />
               <span>Dados Seguros</span>
             </div>
           </motion.div>
@@ -207,11 +213,11 @@ const Login: React.FC = () => {
           transition={{ duration: 0.6, delay: 0.7 }}
           className="text-center mt-6"
         >
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-white/80">
             Não tem uma conta?{' '}
             <button
               onClick={() => navigate('/portfolio')}
-              className="text-primary hover:text-primary/80 font-medium transition-colors"
+              className="text-cyan-400 hover:text-cyan-300 font-medium transition-colors"
             >
               Criar conta gratuita
             </button>
