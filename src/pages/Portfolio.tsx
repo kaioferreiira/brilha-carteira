@@ -28,11 +28,11 @@ const Portfolio: React.FC = () => {
     value: stock.allocatedValue,
     percentage: stock.percentage,
     color: [
-      'hsl(var(--kinvo-green))',
-      'hsl(var(--kinvo-teal))',
-      'hsl(var(--kinvo-cyan))',
-      'hsl(var(--kinvo-blue))',
-      'hsl(var(--secondary))'
+      'hsl(var(--primary))',
+      'hsl(var(--secondary))',
+      'hsl(var(--accent))',
+      'hsl(var(--success))',
+      'hsl(var(--kinvo-blue))'
     ][index % 5]
   })) || [];
 

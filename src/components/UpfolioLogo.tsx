@@ -22,11 +22,11 @@ export const UpfolioLogo: React.FC<UpfolioLogoProps> = ({ className, size = 'md'
 
   return (
     <div className={cn('flex items-center gap-3', className)}>
-      <div className={cn('rounded-full bg-cyan-500 flex items-center justify-center font-bold text-white', iconSizes[size])}>
+      <div className={cn('rounded-full bg-primary flex items-center justify-center font-bold text-primary-foreground', iconSizes[size])}>
         U
       </div>
       {!collapsed && (
-        <span className={cn('font-bold text-cyan-500', textSizes[size])}>Upfolio</span>
+        <span className={cn('font-bold text-primary', textSizes[size])}>Upfolio</span>
       )}
     </div>
   );

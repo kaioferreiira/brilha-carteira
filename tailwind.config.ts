@@ -50,13 +50,16 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        success: {
+          DEFAULT: "hsl(var(--success))",
+          foreground: "hsl(var(--success-foreground))",
+        },
         kinvo: {
           green: "hsl(var(--kinvo-green))",
-          teal: "hsl(var(--kinvo-teal))",
-          cyan: "hsl(var(--kinvo-cyan))",
           blue: "hsl(var(--kinvo-blue))",
-          navy: "hsl(var(--kinvo-navy))",
-          gray: "hsl(var(--kinvo-gray-light))",
+          accent: "hsl(var(--kinvo-accent))",
+          neutral: "hsl(var(--kinvo-neutral))",
+          success: "hsl(var(--kinvo-success))",
         },
       },
       backgroundImage: {
