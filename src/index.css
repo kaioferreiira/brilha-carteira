@@ -8,151 +8,151 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* 🎨 Nova Paleta de Cores - Gestão Financeira Profissional */
+    /* 🎨 Nova Paleta de Cores - Azul e Laranja */
     
-    /* Background principal */
-    --background: 0 0% 100%;              /* #FFFFFF */
-    --foreground: 0 0% 10%;               /* #1A1A1A */
+    /* Background principal - Branco Fundo */
+    --background: 240 100% 99%;           /* #F8F8FF */
+    --foreground: 240 64% 27%;            /* #191970 - Azul Texto */
 
-    /* Cards e containers */
-    --card: 0 0% 100%;                    /* #FFFFFF */
-    --card-foreground: 0 0% 10%;          /* #1A1A1A */
+    /* Cards e containers - Branco Fundo */
+    --card: 240 100% 99%;                 /* #F8F8FF */
+    --card-foreground: 240 64% 27%;       /* #191970 - Azul Texto */
 
-    /* Popovers e dropdowns */
-    --popover: 0 0% 100%;                 /* #FFFFFF */
-    --popover-foreground: 0 0% 10%;       /* #1A1A1A */
+    /* Popovers e dropdowns - Branco Fundo */
+    --popover: 240 100% 99%;              /* #F8F8FF */
+    --popover-foreground: 240 64% 27%;    /* #191970 - Azul Texto */
 
-    /* 🟢 Cor Primária - Verde (ações principais) */
-    --primary: 123 46% 34%;               /* #2E7D32 */
-    --primary-foreground: 0 0% 100%;      /* #FFFFFF */
+    /* 🔵 Cor Primária - Azul Primário (ações principais) */
+    --primary: 215 100% 34%;              /* #0047AB */
+    --primary-foreground: 240 100% 99%;   /* #F8F8FF */
 
-    /* 🔵 Cor Secundária - Azul (navegação e links) */
-    --secondary: 210 79% 42%;             /* #1565C0 */
-    --secondary-foreground: 0 0% 100%;    /* #FFFFFF */
+    /* 🟠 Cor Secundária - Laranja Destaque (navegação e links) */
+    --secondary: 33 100% 50%;             /* #FF8C00 */
+    --secondary-foreground: 240 100% 99%; /* #F8F8FF */
 
     /* Muted (elementos desabilitados) */
-    --muted: 210 40% 98%;                 /* #F5F7FA */
-    --muted-foreground: 0 0% 46%;
+    --muted: 240 30% 96%;                 /* Variação do Branco Fundo */
+    --muted-foreground: 240 20% 50%;
 
-    /* ⭐ Acento - Amarelo (destaques) */
-    --accent: 45 100% 65%;                /* #FFD54F */
-    --accent-foreground: 0 0% 10%;        /* #1A1A1A */
+    /* ⭐ Acento - Laranja Destaque (destaques e ações) */
+    --accent: 33 100% 50%;                /* #FF8C00 */
+    --accent-foreground: 240 100% 99%;    /* #F8F8FF */
 
-    /* ✅ Sucesso */
-    --success: 122 39% 44%;               /* #43A047 */
-    --success-foreground: 0 0% 100%;
+    /* ✅ Sucesso - Laranja Destaque */
+    --success: 33 100% 50%;               /* #FF8C00 */
+    --success-foreground: 240 100% 99%;
 
-    /* ❌ Erro/Destrutivo */
+    /* ❌ Erro/Destrutivo - Vermelho mantido para semântica universal */
     --destructive: 4 73% 56%;             /* #E53935 */
-    --destructive-foreground: 0 0% 98%;
+    --destructive-foreground: 240 100% 99%;
 
     /* Bordas e inputs */
-    --border: 210 20% 90%;
-    --input: 210 20% 90%;
-    --ring: 123 46% 34%;                  /* Primary color */
+    --border: 240 20% 90%;
+    --input: 240 20% 90%;
+    --ring: 215 100% 34%;                 /* Azul Primário */
 
     --radius: 1rem;
 
     /* Cores customizadas para elementos específicos */
-    --kinvo-green: 123 46% 34%;           /* Primary verde */
-    --kinvo-blue: 210 79% 42%;            /* Secondary azul */
-    --kinvo-accent: 45 100% 65%;          /* Accent amarelo */
-    --kinvo-neutral: 210 40% 98%;         /* Neutral base */
-    --kinvo-success: 122 39% 44%;         /* Success verde */
+    --kinvo-green: 215 100% 34%;          /* Azul Primário */
+    --kinvo-blue: 215 100% 34%;           /* Azul Primário */
+    --kinvo-accent: 33 100% 50%;          /* Laranja Destaque */
+    --kinvo-neutral: 240 100% 99%;        /* Branco Fundo */
+    --kinvo-success: 33 100% 50%;         /* Laranja Destaque */
 
     /* Gradientes modernos */
-    --gradient-kinvo: linear-gradient(135deg, hsl(123 46% 34%) 0%, hsl(210 79% 42%) 100%);
-    --gradient-sunset: linear-gradient(180deg, hsl(123 46% 34%) 0%, hsl(122 39% 44%) 50%, hsl(210 79% 42%) 100%);
-    --gradient-card: linear-gradient(145deg, hsl(123 46% 34% / 0.08) 0%, hsl(210 79% 42% / 0.05) 100%);
-    --gradient-accent: linear-gradient(135deg, hsl(45 100% 65%) 0%, hsl(45 100% 75%) 100%);
+    --gradient-kinvo: linear-gradient(135deg, hsl(215 100% 34%) 0%, hsl(33 100% 50%) 100%);
+    --gradient-sunset: linear-gradient(180deg, hsl(215 100% 34%) 0%, hsl(215 100% 40%) 50%, hsl(33 100% 50%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(215 100% 34% / 0.08) 0%, hsl(33 100% 50% / 0.05) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(33 100% 50%) 0%, hsl(33 100% 60%) 100%);
 
     /* Sombras refinadas */
-    --shadow-kinvo: 0 10px 25px hsl(123 46% 34% / 0.15);
-    --shadow-float: 0 20px 40px hsl(210 79% 42% / 0.2);
-    --shadow-card: 0 4px 20px hsl(0 0% 10% / 0.08);
+    --shadow-kinvo: 0 10px 25px hsl(215 100% 34% / 0.15);
+    --shadow-float: 0 20px 40px hsl(33 100% 50% / 0.2);
+    --shadow-card: 0 4px 20px hsl(240 64% 27% / 0.08);
 
     /* Sidebar */
-    --sidebar-background: 0 0% 100%;
-    --sidebar-foreground: 0 0% 10%;
-    --sidebar-primary: 123 46% 34%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 210 40% 98%;
-    --sidebar-accent-foreground: 0 0% 10%;
-    --sidebar-border: 210 20% 90%;
-    --sidebar-ring: 123 46% 34%;
+    --sidebar-background: 240 100% 99%;
+    --sidebar-foreground: 240 64% 27%;
+    --sidebar-primary: 215 100% 34%;
+    --sidebar-primary-foreground: 240 100% 99%;
+    --sidebar-accent: 240 30% 96%;
+    --sidebar-accent-foreground: 240 64% 27%;
+    --sidebar-border: 240 20% 90%;
+    --sidebar-ring: 215 100% 34%;
   }
 
   .dark {
-    /* 🌙 Modo Escuro - Paleta Ajustada */
+    /* 🌙 Modo Escuro - Paleta Azul e Laranja */
     
-    /* Background principal escuro */
-    --background: 0 0% 7%;                /* #121212 */
-    --foreground: 0 0% 88%;               /* #E0E0E0 */
+    /* Background principal escuro - Azul Texto mais escuro */
+    --background: 240 50% 10%;            /* Variação escura do Azul Texto */
+    --foreground: 240 100% 99%;           /* #F8F8FF - Branco Fundo */
 
     /* Cards e containers escuros */
-    --card: 0 0% 12%;                     /* #1E1E1E */
-    --card-foreground: 0 0% 88%;          /* #E0E0E0 */
+    --card: 240 50% 15%;                  /* Azul escuro variação */
+    --card-foreground: 240 100% 99%;      /* #F8F8FF */
 
     /* Popovers escuros */
-    --popover: 0 0% 12%;                  /* #1E1E1E */
-    --popover-foreground: 0 0% 88%;       /* #E0E0E0 */
+    --popover: 240 50% 15%;               /* Azul escuro variação */
+    --popover-foreground: 240 100% 99%;   /* #F8F8FF */
 
-    /* 🟢 Primária - Verde mais brilhante no escuro */
-    --primary: 122 39% 49%;               /* #4CAF50 */
-    --primary-foreground: 0 0% 100%;      /* #FFFFFF */
+    /* 🔵 Primária - Azul Primário mais brilhante no escuro */
+    --primary: 215 100% 45%;              /* Azul Primário mais claro */
+    --primary-foreground: 240 100% 99%;   /* #F8F8FF */
 
-    /* 🔵 Secundária - Azul mais brilhante no escuro */
-    --secondary: 207 90% 54%;             /* #2196F3 */
-    --secondary-foreground: 0 0% 100%;    /* #FFFFFF */
+    /* 🟠 Secundária - Laranja Destaque (igual em ambos os modos) */
+    --secondary: 33 100% 50%;             /* #FF8C00 */
+    --secondary-foreground: 240 100% 99%; /* #F8F8FF */
 
     /* Muted escuro */
-    --muted: 0 0% 12%;                    /* #1E1E1E */
-    --muted-foreground: 0 0% 65%;
+    --muted: 240 50% 15%;                 /* Azul escuro variação */
+    --muted-foreground: 240 20% 70%;
 
-    /* ⭐ Acento - Amarelo (igual em ambos os modos) */
-    --accent: 45 100% 65%;                /* #FFD54F */
-    --accent-foreground: 0 0% 7%;         /* #121212 */
+    /* ⭐ Acento - Laranja Destaque (igual em ambos os modos) */
+    --accent: 33 100% 50%;                /* #FF8C00 */
+    --accent-foreground: 240 100% 99%;    /* #F8F8FF */
 
-    /* ✅ Sucesso */
-    --success: 122 39% 44%;               /* #43A047 */
-    --success-foreground: 0 0% 100%;
+    /* ✅ Sucesso - Laranja Destaque */
+    --success: 33 100% 50%;               /* #FF8C00 */
+    --success-foreground: 240 100% 99%;
 
     /* ❌ Erro/Destrutivo */
     --destructive: 4 73% 56%;             /* #E53935 */
-    --destructive-foreground: 0 0% 98%;
+    --destructive-foreground: 240 100% 99%;
 
     /* Bordas e inputs escuros */
-    --border: 0 0% 20%;
-    --input: 0 0% 20%;
-    --ring: 122 39% 49%;                  /* Primary dark */
+    --border: 240 30% 25%;
+    --input: 240 30% 25%;
+    --ring: 215 100% 45%;                 /* Azul Primário claro */
 
     /* Cores customizadas dark mode */
-    --kinvo-green: 122 39% 49%;           /* Primary verde dark */
-    --kinvo-blue: 207 90% 54%;            /* Secondary azul dark */
-    --kinvo-accent: 45 100% 65%;          /* Accent amarelo */
-    --kinvo-neutral: 0 0% 12%;            /* Neutral base dark */
-    --kinvo-success: 122 39% 44%;         /* Success verde */
+    --kinvo-green: 215 100% 45%;          /* Azul Primário claro */
+    --kinvo-blue: 215 100% 45%;           /* Azul Primário claro */
+    --kinvo-accent: 33 100% 50%;          /* Laranja Destaque */
+    --kinvo-neutral: 240 50% 15%;         /* Azul escuro */
+    --kinvo-success: 33 100% 50%;         /* Laranja Destaque */
 
     /* Gradientes dark mode */
-    --gradient-kinvo: linear-gradient(135deg, hsl(122 39% 49%) 0%, hsl(207 90% 54%) 100%);
-    --gradient-sunset: linear-gradient(180deg, hsl(122 39% 49%) 0%, hsl(122 39% 44%) 50%, hsl(207 90% 54%) 100%);
-    --gradient-card: linear-gradient(145deg, hsl(122 39% 49% / 0.12) 0%, hsl(207 90% 54% / 0.08) 100%);
-    --gradient-accent: linear-gradient(135deg, hsl(45 100% 65%) 0%, hsl(45 100% 75%) 100%);
+    --gradient-kinvo: linear-gradient(135deg, hsl(215 100% 45%) 0%, hsl(33 100% 50%) 100%);
+    --gradient-sunset: linear-gradient(180deg, hsl(215 100% 45%) 0%, hsl(215 100% 50%) 50%, hsl(33 100% 50%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(215 100% 45% / 0.12) 0%, hsl(33 100% 50% / 0.08) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(33 100% 50%) 0%, hsl(33 100% 60%) 100%);
 
     /* Sombras dark mode */
-    --shadow-kinvo: 0 10px 25px hsl(122 39% 49% / 0.2);
-    --shadow-float: 0 20px 40px hsl(207 90% 54% / 0.25);
+    --shadow-kinvo: 0 10px 25px hsl(215 100% 45% / 0.2);
+    --shadow-float: 0 20px 40px hsl(33 100% 50% / 0.25);
     --shadow-card: 0 4px 20px hsl(0 0% 0% / 0.3);
 
     /* Sidebar dark */
-    --sidebar-background: 0 0% 7%;
-    --sidebar-foreground: 0 0% 88%;
-    --sidebar-primary: 122 39% 49%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 0 0% 12%;
-    --sidebar-accent-foreground: 0 0% 88%;
-    --sidebar-border: 0 0% 20%;
-    --sidebar-ring: 122 39% 49%;
+    --sidebar-background: 240 50% 10%;
+    --sidebar-foreground: 240 100% 99%;
+    --sidebar-primary: 215 100% 45%;
+    --sidebar-primary-foreground: 240 100% 99%;
+    --sidebar-accent: 240 50% 15%;
+    --sidebar-accent-foreground: 240 100% 99%;
+    --sidebar-border: 240 30% 25%;
+    --sidebar-ring: 215 100% 45%;
   }
 }
 
