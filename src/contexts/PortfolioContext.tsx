@@ -28,7 +28,7 @@ export const PortfolioProvider: React.FC<PortfolioProviderProps> = ({ children }
       const initialPortfolio: Portfolio = {
         id: '1',
         userId: user.id,
-        name: 'Minha Carteira',
+        name: '',
         totalValue: 0,
         cashAmount: 10000, // Valor inicial em caixa
         stocks: [],

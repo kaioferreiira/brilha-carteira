@@ -1,17 +1,18 @@
+
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { Eye, EyeOff, Mail, Lock, TrendingUp, Shield } from 'lucide-react';
+import { Eye, EyeOff, Mail, Lock, Shield } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { UpfolioLogo } from '@/components/UpfolioLogo';
 import { useAuth } from '@/contexts/AuthContext';
 import porscheBg from '@/assets/porsche-bg.jpeg';
+import closeFriendsLogoTransparent from '@/assets/close-friends-logo-sem-fundo.png';
 
 const loginSchema = z.object({
   email: z.string().email('Email inválido').min(1, 'Email é obrigatório'),
@@ -64,42 +65,24 @@ const Login: React.FC = () => {
       >
         {/* Card */}
         <div className="bg-white/95 backdrop-blur-md border border-white/20 rounded-3xl shadow-2xl p-8 md:p-10">
-          {/* Header */}
-          <div className="text-center mb-8">
-            <motion.h1
-              variants={fadeInUp}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-3xl md:text-4xl font-bold mb-3 text-primary"
-            >
-              Bem-vindo ao Close Friends Pro
-            </motion.h1>
+          {/* Logo + Title */}
+          <motion.div
+            variants={fadeInUp}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="flex flex-col items-center mb-6"
+          >
+            <img
+              src={closeFriendsLogoTransparent}
+              alt="Close Friends Pro"
+              className="w-180 h-180 object-contain mb-2 transform scale-110"
+            />
             <motion.p
               variants={fadeInUp}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-gray-600 text-sm md:text-base"
+              className="text-3xl font-bold text-primary text-center transform scale-10"
             >
-              Sistema avançado de análise de investimentos
+              Close Friends PRO
             </motion.p>
-          </div>
-
-          {/* Logo/Icon */}
-          <motion.div
-            variants={fadeInUp}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="flex justify-center mb-6"
-          >
-            <UpfolioLogo size="lg" />
-          </motion.div>
-
-          <motion.div
-            variants={fadeInUp}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-center mb-8"
-          >
-            <h2 className="text-xl font-semibold mb-2 text-gray-900">Close Friends Pro</h2>
-            <p className="text-gray-600 text-sm">
-              Sistema profissional de gestão de carteiras
-            </p>
           </motion.div>
 
           {/* Form */}
@@ -113,7 +96,7 @@ const Login: React.FC = () => {
           >
             <div className="space-y-2">
               <Label htmlFor="email" className="text-sm font-medium">
-                Email profissional
+                Email
               </Label>
               <div className="relative">
                 <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
@@ -170,12 +153,7 @@ const Login: React.FC = () => {
             </Button>
 
             <div className="text-center pt-2">
-              <p className="text-xs text-gray-500 mb-1">
-                Acesso restrito a investidores cadastrados
-              </p>
-              <p className="text-xs text-gray-500">
-                Demo: investidor@closefriends.com.br / 123456
-              </p>
+              <p className="text-xs text-gray-500 mb-1">Acesso restrito a investidores cadastrados</p>
             </div>
 
             <div className="text-center pt-2">
@@ -219,6 +197,7 @@ const Login: React.FC = () => {
             >
               Criar conta gratuita
             </button>
+            {' '}para Solicitar acesso.
           </p>
         </motion.div>
       </motion.div>

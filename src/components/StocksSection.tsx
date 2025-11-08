@@ -71,7 +71,7 @@ export const StocksSection: React.FC = () => {
                   onClick={() => setShowProjection(!showProjection)}
                   className="rounded-full"
                 >
-                  {showProjection ? 'Ocultar' : 'Ver'} Valores Alocados
+                  {showProjection ? 'Ocultar' : 'Ver'} projeção de aporte
                 </Button>
               </div>
             )}
@@ -104,11 +104,11 @@ export const StocksSection: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
           >
-            <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-muted flex items-center justify-center">
+            {/* <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-muted flex items-center justify-center">
               <Plus size={32} className="text-muted-foreground" />
-            </div>
+            </div> */}
             <h3 className="text-lg font-semibold mb-2">
-              Nenhuma ação ainda
+              Nenhuma ação cadastrada!
             </h3>
             <p className="text-muted-foreground mb-6">
               Adicione sua primeira ação para começar a montar sua carteira

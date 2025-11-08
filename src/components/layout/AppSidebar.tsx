@@ -1,3 +1,4 @@
+import closeFriendsLogoTransparent from '@/assets/close-friends-logo-sem-fundo.png';
 import { LayoutDashboard, Wallet, TrendingUp, FileText, Settings, HelpCircle } from "lucide-react";
 import { NavLink, useLocation } from "react-router-dom";
 import {
@@ -62,7 +63,14 @@ export function AppSidebar() {
       <SidebarContent>
         {/* Logo */}
         <div className="flex h-16 items-center px-4 border-b">
-          <UpfolioLogo collapsed={!open} />
+          {location.pathname === '/portfolio' ? (
+            <img
+              src={closeFriendsLogoTransparent}
+              className="w-[120px] h-[120px] object-contain"
+            />
+          ) : (
+            <UpfolioLogo collapsed={!open} />
+          )}
         </div>
 
         {/* Main Navigation */}
