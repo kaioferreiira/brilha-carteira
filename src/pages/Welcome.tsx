@@ -55,7 +55,7 @@ const Welcome: React.FC = () => {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="text-4xl md:text-6xl font-bold mb-6 text-white"
             >
-              Bem-vindo ao Upfolio
+              Bem-vindo ao Close Friends Pro
             </motion.h1>
 
             <motion.p

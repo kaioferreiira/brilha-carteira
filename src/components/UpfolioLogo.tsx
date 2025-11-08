@@ -1,5 +1,6 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
+import closeFriendsLogo from '@/assets/close-friends-logo.png';
 
 interface UpfolioLogoProps {
   className?: string;
@@ -9,9 +10,9 @@ interface UpfolioLogoProps {
 
 export const UpfolioLogo: React.FC<UpfolioLogoProps> = ({ className, size = 'md', collapsed = false }) => {
   const iconSizes = {
-    sm: 'w-8 h-8 text-sm',
-    md: 'w-10 h-10 text-lg',
-    lg: 'w-12 h-12 text-xl'
+    sm: 'w-8 h-8',
+    md: 'w-10 h-10',
+    lg: 'w-12 h-12'
   };
 
   const textSizes = {
@@ -22,11 +23,13 @@ export const UpfolioLogo: React.FC<UpfolioLogoProps> = ({ className, size = 'md'
 
   return (
     <div className={cn('flex items-center gap-3', className)}>
-      <div className={cn('rounded-full bg-primary flex items-center justify-center font-bold text-primary-foreground', iconSizes[size])}>
-        U
-      </div>
+      <img 
+        src={closeFriendsLogo} 
+        alt="Close Friends Pro" 
+        className={cn('object-contain', iconSizes[size])}
+      />
       {!collapsed && (
-        <span className={cn('font-bold text-primary', textSizes[size])}>Upfolio</span>
+        <span className={cn('font-bold text-primary', textSizes[size])}>Close Friends Pro</span>
       )}
     </div>
   );

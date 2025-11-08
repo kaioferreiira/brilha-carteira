@@ -71,7 +71,7 @@ const Login: React.FC = () => {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="text-3xl md:text-4xl font-bold mb-3 text-primary"
             >
-              Bem-vindo ao Upfolio
+              Bem-vindo ao Close Friends Pro
             </motion.h1>
             <motion.p
               variants={fadeInUp}
@@ -88,9 +88,7 @@ const Login: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="flex justify-center mb-6"
           >
-            <div className="w-20 h-20 rounded-full bg-primary flex items-center justify-center shadow-lg">
-              <TrendingUp className="text-primary-foreground" size={36} />
-            </div>
+            <UpfolioLogo size="lg" />
           </motion.div>
 
           <motion.div
@@ -98,7 +96,7 @@ const Login: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="text-center mb-8"
           >
-            <h2 className="text-xl font-semibold mb-2 text-gray-900">Upfolio Pro</h2>
+            <h2 className="text-xl font-semibold mb-2 text-gray-900">Close Friends Pro</h2>
             <p className="text-gray-600 text-sm">
               Sistema profissional de gestão de carteiras
             </p>
@@ -122,7 +120,7 @@ const Login: React.FC = () => {
                 <Input
                   id="email"
                   type="email"
-                  placeholder="investidor@upfolio.com.br"
+                  placeholder="investidor@closefriends.com.br"
                   className="h-12 pl-10 border-gray-300 bg-white rounded-xl text-base"
                   {...register('email')}
                 />
@@ -176,7 +174,7 @@ const Login: React.FC = () => {
                 Acesso restrito a investidores cadastrados
               </p>
               <p className="text-xs text-gray-500">
-                Demo: investidor@upfolio.com.br / 123456
+                Demo: investidor@closefriends.com.br / 123456
               </p>
             </div>
 

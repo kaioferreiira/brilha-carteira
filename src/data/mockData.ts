@@ -29,6 +29,6 @@ export const mockStocks = [
 
 export const mockUser = {
   name: 'Investidor',
-  email: 'investidor@upfolio.com.br',
+  email: 'investidor@closefriends.com.br',
   avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=investor'
 };

@@ -112,7 +112,7 @@ export function AppSidebar() {
       {/* Footer */}
       <SidebarFooter className="border-t p-4">
         <div className="flex items-center gap-2 text-xs text-muted-foreground">
-          {open && <span>© 2025 Upfolio</span>}
+          {open && <span>© 2025 Close Friends Pro</span>}
         </div>
       </SidebarFooter>
     </Sidebar>
