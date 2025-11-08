@@ -135,6 +135,7 @@ npm install
 ```bash
 npm run dev
 ```
+teste
 
 3. **Acesse**: `http://localhost:8080`
 
