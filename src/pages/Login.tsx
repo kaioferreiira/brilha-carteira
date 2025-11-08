@@ -69,7 +69,7 @@ const Login: React.FC = () => {
             <motion.h1
               variants={fadeInUp}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-3xl md:text-4xl font-bold mb-3 text-cyan-500"
+              className="text-3xl md:text-4xl font-bold mb-3 text-primary"
             >
               Bem-vindo ao Upfolio
             </motion.h1>
@@ -88,8 +88,8 @@ const Login: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="flex justify-center mb-6"
           >
-            <div className="w-20 h-20 rounded-full bg-cyan-500 flex items-center justify-center shadow-lg">
-              <TrendingUp className="text-white" size={36} />
+            <div className="w-20 h-20 rounded-full bg-primary flex items-center justify-center shadow-lg">
+              <TrendingUp className="text-primary-foreground" size={36} />
             </div>
           </motion.div>
 
@@ -162,10 +162,10 @@ const Login: React.FC = () => {
               type="submit"
               size="lg"
               disabled={isLoading}
-              className="w-full h-12 text-base font-semibold rounded-xl bg-cyan-500 hover:bg-cyan-600 text-white transition-all duration-300 shadow-lg"
+              className="w-full h-12 text-base font-semibold rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground transition-all duration-300 shadow-lg"
             >
               {isLoading ? (
-                <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white" />
+                <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-primary-foreground" />
               ) : (
                 'Acessar Sistema'
               )}
@@ -183,7 +183,7 @@ const Login: React.FC = () => {
             <div className="text-center pt-2">
               <Link
                 to="/forgot-password"
-                className="text-sm text-cyan-600 hover:text-cyan-700 transition-colors"
+                className="text-sm text-primary hover:text-primary/90 transition-colors"
               >
                 Esqueceu a senha?
               </Link>
@@ -194,14 +194,14 @@ const Login: React.FC = () => {
           <motion.div
             variants={fadeInUp}
             transition={{ duration: 0.6, delay: 0.6 }}
-            className="flex justify-center items-center gap-6 mt-8 pt-6 border-t border-gray-200"
+            className="flex justify-center items-center gap-6 mt-8 pt-6 border-t border-border"
           >
-            <div className="flex items-center gap-2 text-xs text-gray-600">
-              <div className="w-2 h-2 rounded-full bg-cyan-500" />
+            <div className="flex items-center gap-2 text-xs text-muted-foreground">
+              <div className="w-2 h-2 rounded-full bg-accent" />
               <span>Sistema Validado</span>
             </div>
-            <div className="flex items-center gap-2 text-xs text-gray-600">
-              <Shield size={14} className="text-cyan-500" />
+            <div className="flex items-center gap-2 text-xs text-muted-foreground">
+              <Shield size={14} className="text-accent" />
               <span>Dados Seguros</span>
             </div>
           </motion.div>
@@ -217,7 +217,7 @@ const Login: React.FC = () => {
             Não tem uma conta?{' '}
             <button
               onClick={() => navigate('/portfolio')}
-              className="text-cyan-400 hover:text-cyan-300 font-medium transition-colors"
+              className="text-accent hover:text-accent/90 font-medium transition-colors"
             >
               Criar conta gratuita
             </button>

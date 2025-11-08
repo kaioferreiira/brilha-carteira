@@ -44,7 +44,7 @@ const Welcome: React.FC = () => {
             <motion.div
               variants={fadeInUp}
               transition={{ duration: 0.6 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500/20 backdrop-blur-sm text-cyan-400 text-sm font-medium mb-6"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/20 backdrop-blur-sm text-accent text-sm font-medium mb-6"
             >
               <TrendingUp size={16} />
               Sistema Profissional de Gestão de Investimentos
@@ -74,7 +74,7 @@ const Welcome: React.FC = () => {
               <Button
                 size="lg"
                 onClick={() => navigate('/login')}
-                className="w-full sm:w-auto h-12 px-8 text-base font-semibold rounded-full bg-cyan-500 hover:bg-cyan-600 text-white transition-all duration-300 shadow-lg hover:shadow-xl"
+                className="w-full sm:w-auto h-12 px-8 text-base font-semibold rounded-full bg-primary hover:bg-primary/90 text-primary-foreground transition-all duration-300 shadow-lg hover:shadow-xl"
               >
                 Acessar Sistema
               </Button>
