@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { TrendingUp } from 'lucide-react';
 import porscheBg from '@/assets/porsche-bg.jpeg';
+import closeFriendsLogo from '@/assets/close-friends-logo-sem-fundo.png';
 
 const Welcome: React.FC = () => {
   const navigate = useNavigate();
@@ -42,12 +43,16 @@ const Welcome: React.FC = () => {
           {/* Main Content */}
           <div className="text-center mb-16 w-full flex flex-col items-center justify-center">
             <motion.div
-              variants={fadeInUp}
-              transition={{ duration: 0.6 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/20 backdrop-blur-sm text-accent text-sm font-medium mb-6"
+              initial={{ opacity: 0, scale: 0.5, rotate: -10 }}
+              animate={{ opacity: 1, scale: 1, rotate: 0 }}
+              transition={{ duration: 1, ease: "easeOut" }}
+              className="mb-8"
             >
-              <TrendingUp size={16} />
-              Sistema Profissional de Gestão de Investimentos
+              <img 
+                src={closeFriendsLogo} 
+                alt="Close Friends Pro" 
+                className="w-32 h-32 md:w-40 md:h-40 object-contain animate-logo-float"
+              />
             </motion.div>
 
             <motion.h1
@@ -55,7 +60,7 @@ const Welcome: React.FC = () => {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="text-4xl md:text-6xl font-bold mb-6 text-white"
             >
-              Bem-vindo ao Close Friends Pro
+              Bem-vindo ao Close Friends <span className="text-brand-orange">Pro</span>
             </motion.h1>
 
             <motion.p

@@ -61,6 +61,9 @@ export default {
           neutral: "hsl(var(--kinvo-neutral))",
           success: "hsl(var(--kinvo-success))",
         },
+        brand: {
+          orange: "hsl(var(--brand-orange))",
+        },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
@@ -151,6 +154,27 @@ export default {
             boxShadow: "0 0 40px hsl(var(--primary) / 0.6)",
           },
         },
+        "logo-entrance": {
+          "0%": {
+            opacity: "0",
+            transform: "scale(0.5) rotate(-10deg)",
+          },
+          "50%": {
+            transform: "scale(1.1) rotate(5deg)",
+          },
+          "100%": {
+            opacity: "1",
+            transform: "scale(1) rotate(0deg)",
+          },
+        },
+        "logo-float": {
+          "0%, 100%": {
+            transform: "translateY(0px)",
+          },
+          "50%": {
+            transform: "translateY(-10px)",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -160,6 +184,8 @@ export default {
         "bounce-in": "bounce-in 0.6s ease-out",
         "float": "float 6s ease-in-out infinite",
         "pulse-glow": "pulse-glow 2s ease-in-out infinite",
+        "logo-entrance": "logo-entrance 1s ease-out",
+        "logo-float": "logo-float 3s ease-in-out infinite",
       },
     },
   },

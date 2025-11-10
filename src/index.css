@@ -70,6 +70,9 @@ All colors MUST be HSL.
     --shadow-kinvo: 0 10px 25px hsl(215 100% 34% / 0.15);
     --shadow-float: 0 20px 40px hsl(33 100% 50% / 0.2);
     --shadow-card: 0 4px 20px hsl(240 64% 27% / 0.08);
+    
+    /* Brand Colors */
+    --brand-orange: 25 95% 53%;
 
     /* Sidebar */
     --sidebar-background: 240 100% 99%;
@@ -292,5 +295,28 @@ All colors MUST be HSL.
   }
   100% {
     background-position: 1000px 0;
+  }
+}
+
+@keyframes logo-entrance {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) rotate(-10deg);
+  }
+  50% {
+    transform: scale(1.1) rotate(5deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes logo-float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
   }
 }
