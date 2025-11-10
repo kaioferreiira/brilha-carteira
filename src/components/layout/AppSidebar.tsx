@@ -13,7 +13,6 @@ import {
   SidebarFooter,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { UpfolioLogo } from "@/components/UpfolioLogo";
 import { Separator } from "@/components/ui/separator";
 
 const menuItems = [
@@ -62,15 +61,12 @@ export function AppSidebar() {
     <Sidebar collapsible="icon" className="border-r">
       <SidebarContent>
         {/* Logo */}
-        <div className="flex h-16 items-center px-4 border-b">
-          {location.pathname === '/portfolio' ? (
-            <img
-              src={closeFriendsLogoTransparent}
-              className="w-[120px] h-[120px] object-contain"
-            />
-          ) : (
-            <UpfolioLogo collapsed={!open} />
-          )}
+        <div className="flex h-16 items-center justify-center border-b">
+          <img
+            src={closeFriendsLogoTransparent}
+            alt="Close Friends Pro"
+            className="w-[100px] h-[100px] object-contain"
+          />
         </div>
 
         {/* Main Navigation */}
