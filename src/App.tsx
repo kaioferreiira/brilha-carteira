@@ -11,6 +11,7 @@ import Welcome from "./pages/Welcome";
 import Login from "./pages/Login";
 import Portfolio from "./pages/Portfolio";
 import RecommendedPortfolio from "./pages/RecommendedPortfolio";
+import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -39,6 +40,14 @@ const App = () => (
                 element={
                   <ProtectedRoute>
                     <RecommendedPortfolio />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/configuracoes" 
+                element={
+                  <ProtectedRoute>
+                    <Settings />
                   </ProtectedRoute>
                 } 
               />

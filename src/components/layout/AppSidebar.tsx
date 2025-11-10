@@ -40,11 +40,6 @@ const menuItems = [
 
 const footerItems = [
   {
-    title: "Configurações",
-    url: "#",
-    icon: Settings,
-  },
-  {
     title: "Ajuda",
     url: "#",
     icon: HelpCircle,

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Bell, Search, Settings, Moon, Sun, LogOut } from "lucide-react";
+import { Bell, Search, Settings, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -14,16 +14,12 @@ import {
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { useAuth } from "@/contexts/AuthContext";
 import { Badge } from "@/components/ui/badge";
+import { useNavigate } from "react-router-dom";
 
 export function AppHeader() {
   const { user, logout } = useAuth();
-  const [isDark, setIsDark] = useState(false);
+  const navigate = useNavigate();
   const [notifications] = useState(3);
-
-  const toggleTheme = () => {
-    setIsDark(!isDark);
-    document.documentElement.classList.toggle("dark");
-  };
 
   return (
     <header className="sticky top-0 z-40 border-b bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/60">
@@ -45,20 +41,6 @@ export function AppHeader() {
 
         {/* Right Actions */}
         <div className="flex items-center gap-2">
-          {/* Theme Toggle */}
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={toggleTheme}
-            className="hidden md:inline-flex"
-          >
-            {isDark ? (
-              <Sun className="h-5 w-5" />
-            ) : (
-              <Moon className="h-5 w-5" />
-            )}
-          </Button>
-
           {/* Notifications */}
           <Button variant="ghost" size="icon" className="relative">
             <Bell className="h-5 w-5" />
@@ -94,22 +76,9 @@ export function AppHeader() {
                 </div>
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={() => navigate("/configuracoes")}>
                 <Settings className="mr-2 h-4 w-4" />
                 <span>Configurações</span>
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={toggleTheme} className="md:hidden">
-                {isDark ? (
-                  <>
-                    <Sun className="mr-2 h-4 w-4" />
-                    <span>Modo Claro</span>
-                  </>
-                ) : (
-                  <>
-                    <Moon className="mr-2 h-4 w-4" />
-                    <span>Modo Escuro</span>
-                  </>
-                )}
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick={logout} className="text-destructive">
