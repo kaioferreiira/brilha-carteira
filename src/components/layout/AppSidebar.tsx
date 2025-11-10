@@ -58,10 +58,10 @@ export function AppSidebar() {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <Sidebar collapsible="icon" className="border-r">
-      <SidebarContent>
+    <Sidebar collapsible="icon" className="border-r bg-sidebar">
+      <SidebarContent className="bg-sidebar">
         {/* Logo */}
-        <div className="flex h-16 items-center justify-center border-b">
+        <div className="flex h-16 items-center justify-center border-b bg-sidebar">
           <img
             src={closeFriendsLogoTransparent}
             alt="Close Friends Pro"
@@ -114,8 +114,8 @@ export function AppSidebar() {
       </SidebarContent>
 
       {/* Footer */}
-      <SidebarFooter className="border-t p-4">
-        <div className="flex items-center gap-2 text-xs text-muted-foreground">
+      <SidebarFooter className="border-t p-4 bg-sidebar">
+        <div className="flex items-center gap-2 text-xs text-sidebar-foreground">
           {open && <span>© 2025 Close Friends Pro</span>}
         </div>
       </SidebarFooter>
